@@ -1,0 +1,95 @@
+<div class="wrapper">
+
+<app-menu></app-menu>
+<app-header></app-header>
+
+<div id="content-page" class="content-page">
+<div class="container-fluid">
+
+<div class="row justify-content-center">
+<div class="col-lg-8">
+
+<div class="iq-card">
+
+<div class="iq-card-header d-flex justify-content-between">
+<div class="iq-header-title">
+<h4 class="card-title">Ajouter Administrateur</h4>
+</div>
+</div>
+
+<div class="iq-card-body">
+
+<form (ngSubmit)="addNewAdmin()" [formGroup]="adminForm">
+
+<div class="row">
+
+<div class="col-md-6 mb-4">
+<label>Nom</label>
+<div class="input-group">
+<div class="input-group-prepend">
+<span class="input-group-text"><i class="ri-user-line"></i></span>
+</div>
+<input formControlName="nom" type="text" class="form-control" placeholder="Nom">
+</div>
+</div>
+
+<div class="col-md-6 mb-4">
+<label>Prénom</label>
+<div class="input-group">
+<div class="input-group-prepend">
+<span class="input-group-text"><i class="ri-user-line"></i></span>
+</div>
+<input formControlName="prenom" type="text" class="form-control" placeholder="Prénom">
+</div>
+</div>
+
+<div class="col-md-6 mb-4">
+<label>Email</label>
+<div class="input-group">
+<div class="input-group-prepend">
+<span class="input-group-text"><i class="ri-mail-line"></i></span>
+</div>
+<input formControlName="email" type="email" class="form-control" placeholder="admin@email.com">
+</div>
+</div>
+
+<div class="col-md-6 mb-4">
+<label>Mot de passe</label>
+<div class="input-group">
+<div class="input-group-prepend">
+<span class="input-group-text"><i class="ri-lock-line"></i></span>
+</div>
+<input formControlName="pwd" type="password" class="form-control" placeholder="Mot de passe">
+</div>
+</div>
+
+<div class="col-md-12 mb-4">
+<label>Role</label>
+<select class="form-control" formControlName="role">
+<option value="">Choisir un rôle</option>
+<option value="superadmin">Super Admin</option>
+<option value="sousadmin">Sous Admin</option>
+</select>
+</div>
+
+</div>
+
+<div class="text-center mt-4">
+<button class="btn btn-primary btn-lg">
+<i class="ri-user-add-line"></i> Ajouter Administrateur
+</button>
+</div>
+
+</form>
+
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<app-footer></app-footer>

@@ -1,0 +1,56 @@
+<div class="wrapper">
+
+   <app-menu></app-menu>
+   <app-header></app-header>
+
+<div id="content-page" class="content-page">
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <div class="profile-card">
+             <div class="profile-left">
+
+                 <img src="assets/images/user/user.png"
+                         class="profile-img"
+                         alt="user">
+            <h4>{{userDetails.nom}} {{userDetails.prenom}}</h4>
+                  <span class="profile-role">
+                   {{userDetails.role}}
+                  </span>
+             <a routerLink="/updateprofil/{{userDetails.id}}"
+                class="btn-edit"> Modifier Profil </a>
+            </div>
+      <div class="profile-right"> <h5 class="profile-title">Informations</h5>
+           <div class="profile-info">
+             <div class="info-box">
+                <label>Nom</label>
+                <p>{{userDetails.nom}}</p>
+        </div>
+        <div class="info-box">
+          <label>Prénom</label>
+        <p>{{userDetails.prenom}}</p>
+        </div>
+         <div class="info-box">
+            <label>Email</label>
+           <p>{{userDetails.email}}</p>
+          </div>
+        <div class="info-box">
+         <label>Role</label>
+        <p>{{userDetails.role}}</p>
+        </div>
+       </div>
+      <div class="profile-social">
+      <i class="ri-facebook-circle-fill"></i>
+      <i class="ri-twitter-fill"></i>
+      <i class="ri-instagram-fill"></i>
+      </div>
+      </div>
+   </div>
+      </div>
+                 </div>
+             </div>
+       </div>
+
+<app-footer></app-footer>
+
+</div>

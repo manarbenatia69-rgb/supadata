@@ -1,0 +1,116 @@
+/* خلفية الصفحة */
+.content-page{
+background:#f6f8fb;
+}
+
+/* card */
+.iq-card{
+border:none;
+border-radius:12px;
+box-shadow:0 6px 18px rgba(0,0,0,0.06);
+}
+
+/* title */
+.card-title{
+color:var(--iq-primary);
+font-weight:600;
+}
+
+/* search input */
+.dataTables_filter input{
+border-radius:8px;
+border:1px solid #ddd;
+padding:8px 12px;
+transition:0.3s;
+}
+
+.dataTables_filter input:focus{
+border-color:var(--iq-primary);
+box-shadow:0 0 0 0.15rem rgba(0,0,0,0.05);
+}
+
+/* table */
+.table{
+border-radius:10px;
+overflow:hidden;
+}
+
+/* table header */
+.table thead{
+background:var(--iq-primary);
+color:white;
+}
+
+.table thead th{
+border:none;
+font-weight:500;
+}
+
+/* rows hover */
+.table tbody tr{
+transition:0.2s;
+}
+
+.table tbody tr:hover{
+background:#f2f5ff;
+}
+
+/* avatar image */
+.avatar-40{
+width:40px;
+height:40px;
+border-radius:50%;
+border:2px solid var(--iq-primary);
+}
+
+/* action buttons */
+.action-btn{
+border:none;
+background:transparent;
+padding:6px;
+margin-right:6px;
+border-radius:6px;
+cursor:pointer;
+transition:0.2s;
+}
+
+/* edit */
+.iq-bg-primary{
+background:var(--iq-primary);
+color:white;
+padding:6px 10px;
+border-radius:6px;
+}
+
+/* delete */
+.iq-bg-danger{
+background:#ff4d4f;
+color:white;
+padding:6px 10px;
+border-radius:6px;
+}
+
+/* hover */
+.iq-bg-primary:hover{
+background:var(--iq-primary-hover);
+}
+
+.iq-bg-danger:hover{
+background:#e63c3f;
+}
+
+/* lock buttons */
+.btn-3d{
+border-radius:6px;
+box-shadow:0 3px 8px rgba(0,0,0,0.1);
+}
+
+/* pagination */
+.pagination .page-item.active .page-link{
+background:var(--iq-primary);
+border-color:var(--iq-primary);
+}
+
+.pagination .page-link{
+color:var(--iq-primary);
+}

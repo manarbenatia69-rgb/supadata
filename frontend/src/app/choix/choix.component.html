@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Choix de connexion</title>
+  <link rel="stylesheet" href="choix.component.css">
+</head>
+<body>
+<div class="dizme_tm_header" >
+    <div class="container">
+      <div class="inner">
+        <div class="logo">
+          <a routerLink="/" aria-label="Accueil"><img src="assets/img/logo/logos.png" alt="Supadata" /></a>
+        </div>
+        <div class="menu">
+          <ul class="anchor_nav">
+            <li><a routerLink="/">Home</a></li>
+            <li class="current"><a routerLink="/contact">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<div class="choix-container">
+  <h2 class="title-animation">veuillez choisir votre type de connexion</h2>
+
+  <div class="cards">
+    <a href="login-employer" class="card card-1">
+      <div class="icon-box">👨‍💻</div>
+      <h3>Employer</h3>
+      <p>Se connecter en tant qu’employé</p>
+      <span class="arrow">→</span>
+    </a>
+
+    <a href="login-entreprise" class="card card-2">
+      <div class="icon-box">🏢</div>
+      <h3>Entreprise</h3>
+      <p>Se connecter en tant qu’entreprise</p>
+      <span class="arrow">→</span>
+    </a>
+
+    <a href="login-particulier" class="card card-3">
+      <div class="icon-box">👤</div>
+      <h3>Particulier</h3>
+      <p>Se connecter en tant que particulier</p>
+      <span class="arrow">→</span>
+    </a>
+  </div>
+</div>
+</body>
+<app-footer></app-footer>
+</html>

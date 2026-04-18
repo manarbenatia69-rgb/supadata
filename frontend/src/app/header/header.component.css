@@ -1,0 +1,56 @@
+.dizme_tm_mobile_menu .dropdown .dropdown_inner ul li .login_trigger{
+    text-decoration:none;
+    color:#000;
+    font-weight:500;
+    background: #fff;
+    font-family:jost,sans-serif;
+    transition:all .3s ease
+}
+.dizme_tm_mobile_menu .dropdown .dropdown_inner ul li {
+    text-decoration:none;
+    color:#000;
+    font-weight:500;
+    font-family:jost,sans-serif;
+    transition:all .3s ease
+}
+.dizme_tm_header {
+    position: fixed; /* Besh yo93ed dima lfou9 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff !important; /* Background abyadh dima */
+    z-index: 999; /* Besh ykoun fou9 el klem lkol */
+    box-shadow: 0px 2px 10px rgba(0,0,0,0.1); /* Chwaya dhall besh yebda mafsoul 3al page */
+    transition: all .3s ease;
+}
+
+/* Ki taamel scroll w tzid el classe .animate */
+.dizme_tm_header.animate {
+    background-color: #fff !important;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.dizme_tm_header .menu ul li {
+    color:#7c6cf2
+}
+/* Slightly tighter header for a cleaner hierarchy. */
+.dizme_tm_header .inner{
+    padding:3px 0
+}
+.dizme_tm_header .logo img{
+    max-height:44px;
+    width:auto
+}
+/* Header polish on Home (glass + subtle border). */
+.dizme_tm_header.animate{
+    background-color:rgba(255,255,255,.78)!important;
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(0,0,0,.06)
+}
+.dizme_tm_header .download_cv a{
+    border-color:rgba(124,108,242,.35)!important
+}
+.dizme_tm_header .download_cv a:before{
+    background:linear-gradient(135deg,var(--primary),var(--info))!important
+}

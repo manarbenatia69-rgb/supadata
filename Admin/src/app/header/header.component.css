@@ -1,0 +1,32 @@
+.iq-top-navbar .iq-sub-dropdown.show {
+  display: block;
+}
+/* Header background */
+header {
+  background-color: #6c63ff; /* لون أساسي للمشروع */
+  color: #ffffff;
+}
+
+/* نصوص و أيقونات الـ header */
+header .navbar-nav .nav-link,
+header .navbar-brand,
+header .ri {
+  color: #ffffff;
+}
+
+/* hover على الروابط */
+header .navbar-nav .nav-link:hover {
+  color: #f0f0f0;
+}
+
+/* Dropdown user profile */
+header .dropdown-menu {
+  background-color: #f8f8f8; /* خلفية فاتحة */
+  color: #333333;
+}
+
+/* Hover على عناصر dropdown */
+header .dropdown-menu a:hover {
+  background-color: #6c63ff;
+  color: #ffffff;
+}

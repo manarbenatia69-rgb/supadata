@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+
+	<meta name="author" content="Ansonika">
+	<title> Sign In</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+</head>
+<body>
+	
+<div class="min-vh-100 d-flex flex-column rbk-register-page"> 
+	<section class="rbk-register-hero">
+		<div class="container-fluid rbk-register-hero__inner rbk-register-pad">
+			<a class="rbk-register-hero__home" routerLink="/">&larr; Home</a>
+			<h1 class="rbk-register-hero__title">Inscription Particulier</h1>
+			<p class="rbk-register-hero__subtitle">Une inscription simple et une interface propre pour démarrer rapidement.</p>
+			<img class="rbk-register-hero__art" src="assets/rbk_style/img/rbk-img/2.png" alt="" aria-hidden="true">
+		</div>
+	</section>
+	<div class="d-flex flex-column my-auto">
+		<main class="container-fluid rbk-register-pad">
+					    <div class="row g-2 g-xl-3 align-items-stretch">
+		        <div class="col-12">
+		            <div class="form_container">
+		                <div class="row g-2 g-xl-3 align-items-stretch">
+		                    <div class="col-lg-4 col-xl-3">
+		                        <div id="left_form">
+									<h2>Votre compte</h2>
+									<p></p>
+		                            <img src="assets/rbk_style/img/rbk-img/1.png" class="rbk_bloc_left" alt="Registration illustration" loading="lazy">
+		                        </div>
+		                    </div>
+		                    <div class="col-lg-7 col-xl-8">
+		                        <form (ngSubmit)="addNewParticulier()" [formGroup]="particulierForm"  id="custom" action="https://scardlink.com/addCardUser" method="POST" enctype="multipart/form-data">
+                                    <input type="hidden" name="_token" value="B8PTcxNjjcvDMPcgBdSei2PFuUIlub0utu604Mkt">		                            <input id="website" name="website" type="text" value=""><!-- Leave for security protection, read docs for details. Delete this comment before to publish. -->
+		                            <fieldset title="Personal info" class="step">
+		                                <legend>Personal info</legend>
+		                                
+		                                <!-- /row -->
+		                                <div class="row">
+		                                	 <div class="col-md-5">
+		                                        <div class="form-group">
+		                                            <input formControlName="nom" type="text"  name="nom" class="form-control" placeholder="First Name">
+		                                        </div>
+		                                    </div>
+		                                    <div class="col-md-5">
+		                                        <div class="form-group">
+		                                            <input formControlName="prenom" type="text"  name="prenom" class="form-control" placeholder="Last Name">
+		                                        </div>
+		                                    </div>
+		                                </div>
+		                                <!-- /row -->
+                                        <div class="row"> 
+		                                    <div class="col-md-5">
+		                                        <div class="form-group">
+		                                            <input formControlName="email" type="email"
+													 name="email" class="form-control" placeholder="Email (*)">
+		                                        </div>
+		                                    </div>
+
+		                                    <div class="col-md-5">
+		                                        <div class="form-group">
+		                                            <input formControlName="telephone" type="tel" name="tel" class="form-control" placeholder="Phone (*)" id="phone">
+		                                        </div>
+		                                    </div>
+		                                </div>
+		                                <!-- /row -->
+		                                <div class="row">                                	
+		                                    <div class="col-md-5">
+		                                        <div class="form-group">
+		                                            <input formControlName="adresse" type="text" name="adresse" class="form-control" placeholder="Address">
+		                                        </div>
+		                                    </div>
+		                                    <div class="col-md-5">
+		                                        <div class="form-group">
+		                                            <input formControlName="pwd" type="password" name="pwd" class="form-control" placeholder="Password (*)">
+		                                        </div>
+		                                    </div>		                                   
+		                                    </div>
+		                            </fieldset><!-- End Step one -->                
+		                            <input type="submit" class="finish" value="Finish!">
+		                        </form>
+		                    </div>
+		                </div><!-- /Row -->
+		            </div><!-- /Form_container -->
+		        </div>
+		    </div>
+		    <!-- End row -->
+		</main>
+	</div>
+	<!-- /flex-column -->
+	
+    <!-- /Footer -->
+    </div>
+	<!-- /flex-column -->
+	<div class="cd-overlay-nav">
+		<span></span>
+	</div>
+	<!-- cd-overlay-nav -->
+	<div class="cd-overlay-content">
+		<span></span>
+	</div>
+	<!-- cd-overlay-content -->
+	<!-- Modal terms -->
+	<div class="modal fade" id="terms-txt" tabindex="-1" role="dialog" aria-labelledby="termsLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="termsLabel">Terms and conditions</h4>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn_1" data-bs-dismiss="modal">Close</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+	<!-- Modal info -->
+	<div class="modal fade" id="more-info" tabindex="-1" role="dialog" aria-labelledby="more-infoLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="more-infoLabel">Frequently asked questions</h4>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">			
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn_1" data-bs-dismiss="modal">Close</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+</body>
+
+
+<!-- Mirrored from scardlink.com/register by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 02 Oct 2025 20:17:57 GMT -->
+</html>

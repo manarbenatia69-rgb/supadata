@@ -1,0 +1,46 @@
+ <div class="dizme_tm_mobile_menu">
+                     <div class="mobile_menu_inner">
+                        <div class="mobile_in">
+                           <div class="logo">
+                              <a href="#"><img src="assets/img/logo/logos.png"  /></a>
+                           </div>
+                           <div class="trigger">
+                              <div class="hamburger hamburger--slider">
+                                 <div class="hamburger-box">
+                                    <div class="hamburger-inner"></div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                    
+                  </div>
+                  <div class="dizme_tm_header">
+                     <div class="container">
+                        <div class="inner">
+                           <div class="logo">
+                              <a href="#"><img src="assets/img/logo/logos.png" alt /></a>
+                           </div>
+                           <div class="menu">
+                              <ul class="anchor_nav">
+                             <li [class.current]="activeSection === 'home'"><a href="#home" (click)="scrollTo('home', $event)">Home</a></li>
+                             <li [class.current]="activeSection === 'benefits'"><a href="#benefits" (click)="scrollTo('benefits', $event)">Benefits</a></li>
+                           <li [class.current]="activeSection === 'BusinessesTeams'"><a href="#BusinessesTeams" (click)="scrollTo('BusinessesTeams', $event)">For Businesses & Teams</a></li>
+
+                             <li [class.current]="activeSection === 'Solutions'"><a href="#Solutions" (click)="scrollTo('Solutions', $event)">Solutions</a></li>
+                             <li><a routerLink="/contact">Contact</a></li>
+                             <li class="login_margin login_dropdown">
+
+                             <a *ngIf="!IsEntrepriseIn && !IsEmployerIn && !IsParticulierIn" href="choix" class="login_trigger" >
+                              <i class="fa-solid fa-lock"></i>
+                             <span class="login_chev">  Connexion</span>
+                             </a>
+                            </li> <li class="login_margin">
+                            <a *ngIf="IsEntrepriseIn || IsEmployerIn || IsParticulierIn"  (click)="logout()">
+                              <i class="fa-solid fa-unlock"></i> 
+                               Deconnexion</a></li>  
+                             </ul>
+                           </div>
+                        </div>
+                     </div>
+                </div>

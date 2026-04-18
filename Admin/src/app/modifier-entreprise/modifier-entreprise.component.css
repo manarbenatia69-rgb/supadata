@@ -1,0 +1,24 @@
+/* Titres */
+.card-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #4A3F85;
+}
+/* Inputs */
+.form-control {
+    border-radius: 6px;
+    padding: 10px 12px;
+    border: 1px solid #ced4da;
+    transition: border 0.3s, box-shadow 0.3s;
+}
+
+.form-control:focus {
+    border-color: #6c63ff;
+    box-shadow: 0 0 5px rgba(108, 99, 255, 0.3);
+}
+/* Container général */
+.container-fluid {
+    padding: 20px;
+    background-color: #f5f6fa;
+    min-height: 100vh;
+}

@@ -1,0 +1,122 @@
+<div class="login-shell">
+  <div id="preloader" class="preloader" aria-hidden="true">
+    <div class="inner">
+      <div class="line1"></div>
+      <div class="line2"></div>
+      <div class="line3"></div>
+    </div>
+  </div>
+  <div class="dizme_tm_header">
+    <div class="container">
+      <div class="inner">
+        <div class="logo">
+          
+        </div>
+        <div class="menu">
+          <ul class="anchor_nav">
+            <li><a routerLink="/">Home</a></li>    
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <section class="fxt-template-layout31 login-page" aria-label="Login entreprise">
+    <span class="fxt-shape fxt-animation-active" aria-hidden="true"></span>
+    <div class="fxt-content-wrap">
+      <div class="fxt-heading-content">
+        <div class="fxt-inner-wrap">
+          <div class="fxt-transformY-50 fxt-transition-delay-3">
+            <a routerLink="/" class="fxt-logo" aria-label="Accueil">
+              <img src="assets/loginAssets/img/logo-31.png" alt="Supadata">
+            </a>
+          </div>
+          <div class="fxt-transformY-50 fxt-transition-delay-4">
+            <div class="lp-role">Connexion Entreprise</div>
+          </div>
+
+          <div class="fxt-transformY-50 fxt-transition-delay-4">
+            <h1 class="fxt-main-title">Accedez a vos cartes et gerez vos equipes facilement.</h1>
+          </div>
+        </div>
+         
+          <p class="lp-subtitle">Connectez-vous pour gerer vos cartes, centraliser vos contacts, et suivre vos performances.</p>
+
+          <ul class="lp-chips" aria-label="Points forts">
+            <li>Partage 1-tap</li>
+            <li>Mises a jour</li>
+            <li>Analytics</li>
+          </ul>
+
+          <ul class="lp-switch" aria-label="Choisir un espace">
+            <li><a routerLink="/login-particulier" routerLinkActive="is-active">Particulier</a></li>
+            <li><a routerLink="/login-employer" routerLinkActive="is-active">Employeur</a></li>
+            <li><a routerLink="/login-entreprise" routerLinkActive="is-active">Entreprise</a></li>
+          </ul>
+      </div>
+          
+      <div class="fxt-form-content">
+        <div class="fxt-page-switcher">
+          <h2 class="fxt-page-title mr-3">Login</h2>
+        </div>
+
+        <div class="fxt-main-form">
+          <div class="fxt-inner-wrap">
+            <form (ngSubmit)="login()" [formGroup]="loginForm" method="POST" novalidate>
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-group">
+                    <input
+                      formControlName="email"
+                      id="entreprise-email"
+                      type="email"
+                      class="form-control"
+                      name="email"
+                      required
+                      autocomplete="email"
+                      autofocus
+                      placeholder="Email">
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <div class="form-group lp-field">
+                    <input
+                      formControlName="pwd"
+                      id="entreprise-password"
+                      [type]="showPassword ? 'text' : 'password'"
+                      class="form-control"
+                      name="password"
+                      required
+                      autocomplete="current-password"
+                      placeholder="Mot de passe">
+                    <button type="button" class="lp-pwd-toggle" (click)="togglePassword()" [attr.aria-label]="showPassword ? 'Masquer le mot de passe' : 'Afficher le mot de passe'">
+                      <i class="fa" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'" aria-hidden="true"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-group">
+                    <div class="fxt-checkbox-wrap">
+                      <a routerLink="/contact" class="fxt-switcher-text">Mot de passe oublie ?</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-group">
+                    <button type="submit" class="fxt-btn-fill" [disabled]="isLocked">Se connecter</button>
+                    <div class="lp-hint" *ngIf="isLocked">Acces temporairement bloque. Attendez {{timeLeft}}s.</div>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <div class="fxt-switcher-description">
+              Vous n'avez pas de compte ?
+              <a href="register-entreprise" class="fxt-switcher-text ms-1">Creer un compte</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+</div>

@@ -1,0 +1,310 @@
+<header>
+  <nav id="sidebarMenu" class="sidebar collapse d-lg-block">
+    
+
+    <div class="list-group list-group-flush sidebar__nav">
+      <a
+        routerLink="/fichiercsv"
+        routerLinkActive="active"
+        class="list-group-item list-group-item-action py-2 ripple"
+      >
+        <i class="fa-solid fa-file-arrow-up" aria-hidden="true"></i>
+        <span>Import CSV</span>
+      </a>
+
+      <a routerLink="/card" routerLinkActive="active" class="list-group-item list-group-item-action py-2 ripple">
+        <i class="fa-solid fa-id-card-clip" aria-hidden="true"></i>
+        <span>My Card</span>
+      </a>
+
+      <a routerLink="/contact" routerLinkActive="active" class="list-group-item list-group-item-action py-2 ripple">
+        <i class="fa-solid fa-address-book" aria-hidden="true"></i>
+        <span>Contacts</span>
+      </a>
+
+      
+    </div>
+
+    <div class="sidebar__footer">
+      <button type="button" class="btn btn-outline-danger w-100 sidebar__logout" (click)="logout()">
+        <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i>
+        Logout
+      </button>
+    </div>
+  </nav>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top topbar">
+    <div class="container-fluid">
+      <button
+        class="btn topbar__burger d-lg-none"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#sidebarMenu"
+        aria-controls="sidebarMenu"
+        aria-expanded="false"
+        aria-label="Toggle sidebar"
+      >
+        <i class="fa-solid fa-bars" aria-hidden="true"></i>
+      </button>
+    <div class="sidebar__brand">
+      <a class="sidebar__brandLink" routerLink="/" aria-label="Home">
+        <img class="sidebar__logo" src="assets/img/logo/logos.png" alt="Logo" loading="eager" />
+      </a>
+    </div>
+      <div class="topbar__title">
+        <div class="topbar__titleMain">Employees import</div>
+        <div class="topbar__titleSub text-muted">CSV / Excel upload</div>
+      </div>
+
+      <div class="topbar__actions">
+        <button type="button" class="btn btn-outline-primary topbar__btn" (click)="downloadCsv()">
+          <i class="fa-solid fa-download" aria-hidden="true"></i>
+          Template
+        </button>
+
+        <a class="btn btn-outline-secondary topbar__btn d-none d-md-inline-flex" routerLink="/card">
+          <i class="fa-solid fa-eye" aria-hidden="true"></i>
+          View card
+        </a>
+
+        <a
+          class="btn btn-primary topbar__btn d-none d-md-inline-flex"
+          [routerLink]="'/editcard'"
+          [queryParams]="{ edit: 1 }"
+        >
+          <i class="fa-solid fa-pen-to-square" aria-hidden="true"></i>
+          Edit
+        </a>
+
+        <div class="dropdown">
+          <button
+            class="btn topbar__profile dropdown-toggle"
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <img
+              class="topbar__avatar"
+              [src]="
+                userDetailsEntreprise?.profilepicture
+                  ? userDetailsEntreprise.profilepicture.includes('/') || userDetailsEntreprise.profilepicture.includes('\\\\')
+                    ? userDetailsEntreprise.profilepicture
+                    : '/assets/uploads/employer/' + userDetailsEntreprise.profilepicture
+                  : 'assets/img/slider/avatar.jpg'
+              "
+              alt="Profile picture"
+              loading="lazy"
+            />
+            <span class="topbar__name">{{ userDetailsEntreprise?.nom || 'Account' }}</span>
+          </button>
+
+          <ul class="dropdown-menu dropdown-menu-end topbar__menu">
+            <li>
+              <a class="dropdown-item" routerLink="/card">
+                <i class="fa-solid fa-id-card-clip me-2" aria-hidden="true"></i>
+                My card
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" [routerLink]="'/card'" [queryParams]="{ edit: 1 }">
+                <i class="fa-solid fa-pen-to-square me-2" aria-hidden="true"></i>
+                Edit card
+              </a>
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+            <li>
+              <button type="button" class="dropdown-item text-danger" (click)="logout()">
+                <i class="fa-solid fa-right-from-bracket me-2" aria-hidden="true"></i>
+                Logout
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<body class="main">
+  <div class="container-fluid">
+    <div class="page-head">
+      <div class="page-head__icon" aria-hidden="true">
+        <i class="fa-solid fa-file-csv"></i>
+      </div>
+      <div class="page-head__text">
+        <h1 class="page-head__title">Import employees</h1>
+        <p class="page-head__subtitle text-muted">
+          1) Download the template • 2) Fill it • 3) Upload your file • 4) Verify the preview
+        </p>
+      </div>
+    </div>
+
+    <div class="row g-3">
+      <div class="col-12 col-lg-5">
+        <div class="card ui-card">
+          <div class="card-body">
+            <h5 class="card-title mb-1">Step 1 — Get the template</h5>
+            <p class="text-muted mb-3">Use the same columns to avoid import errors.</p>
+
+            <button type="button" class="btn btn-outline-primary w-100 ui-btn" (click)="downloadCsv()">
+              <img class="ui-btn__img" src="assets/img/icone-excel-vert.png" alt="" aria-hidden="true" />
+              Download CSV template
+            </button>
+          </div>
+        </div>
+
+        <div class="card ui-card mt-3">
+          <div class="card-body">
+            <h5 class="card-title mb-1">Step 2 — Upload your file</h5>
+            <p class="text-muted mb-3">
+              Supported: <span class="badge bg-light text-dark">.csv</span>
+              <span class="badge bg-light text-dark">.xlsx</span>
+              <span class="badge bg-light text-dark">.xls</span>
+            </p>
+
+            <label
+              class="dropzone"
+              (drop)="onDrop($event)"
+              (dragover)="allowDrop($event)"
+              [class.dropzone--active]="!!selectedFile"
+            >
+              <input class="dropzone__input" type="file" accept=".csv,.xlsx,.xls" (change)="onFileSelected($event)" />
+
+              <div class="dropzone__content">
+                <div class="dropzone__icon" aria-hidden="true">
+                  <i class="fa-solid fa-cloud-arrow-up"></i>
+                </div>
+                <div class="dropzone__text">
+                  <div class="dropzone__headline">Drag & drop your file here</div>
+                  <div class="dropzone__sub">
+                    or <span class="dropzone__link">browse</span> to choose a file
+                  </div>
+                </div>
+              </div>
+
+              <div class="dropzone__file" *ngIf="selectedFile as f">
+                <i class="fa-solid fa-file-lines" aria-hidden="true"></i>
+                <span class="dropzone__fileName">{{ f.name }}</span>
+              </div>
+            </label>
+
+            <div class="mt-3 d-flex gap-2 align-items-center">
+              <button type="button" class="btn btn-primary ui-btn" (click)="upload()" [disabled]="!selectedFile">
+                <i class="fa-solid fa-arrow-up-from-bracket" aria-hidden="true"></i>
+                Upload
+              </button>
+
+              <div class="flex-grow-1" *ngIf="progress > 0">
+                <div
+                  class="progress ui-progress"
+                  role="progressbar"
+                  [attr.aria-valuenow]="progress"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                >
+                  <div class="progress-bar" [style.width.%]="progress"></div>
+                </div>
+                <div class="ui-progress__label text-muted">{{ progress }}%</div>
+              </div>
+            </div>
+
+            <div class="alert alert-success mt-3 mb-0" *ngIf="message">
+              {{ message }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-lg-7">
+        <div class="card ui-card h-100">
+          <div class="card-body">
+            <div class="d-flex align-items-center justify-content-between gap-2 mb-2">
+              <div>
+                <h5 class="card-title m-0">Preview</h5>
+                <p class="text-muted m-0" *ngIf="previewData?.length">Showing first 20 rows</p>
+                <p class="text-muted m-0" *ngIf="!previewData?.length">Choose a file to see a preview</p>
+              </div>
+              <span class="badge bg-light text-primary border" *ngIf="previewData?.length">
+                {{ previewData.length }} row(s)
+              </span>
+            </div>
+
+            <div class="table-responsive ui-tableWrap" *ngIf="previewData?.length">
+              <table class="table table-sm table-hover align-middle ui-table">
+                <thead>
+                  <tr>
+                    <th *ngFor="let col of (previewData[0] | keyvalue)" scope="col">
+                      {{ col.key }}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let row of (previewData | slice: 0 : 20)">
+                    <td *ngFor="let col of (row | keyvalue)">
+                      {{ col.value }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-4">
+  <div class="col-12">
+    <div class="card ui-card">
+      <div class="card-body">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+          <h5 class="card-title m-0">Employés enregistrés</h5>
+          <span class="badge rounded-pill bg-primary-light text-primary">
+            {{ employees.length }} membres
+          </span>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-custom align-middle">
+            <thead>
+              <tr>
+                <th>Employé</th>
+                <th>Email</th>
+                <th>Mot de passe (hashé)</th>
+                <th class="text-end">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let emp of employees">
+                <td>
+                  <div class="d-flex align-items-center">
+                    <div class="avatar-circle">
+                      {{ emp.nom[0] }}{{ emp.prenom[0] }}
+                    </div>
+                    <div>
+                      <div class="fw-bold">{{ emp.nom }} {{ emp.prenom }}</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="text-muted">{{ emp.email }}</span></td>
+                <td><code>••••••••</code></td>
+                <td class="text-end">
+                  <button class="btn btn-sm btn-light-danger" (click)="DeleteEmployer(emp)">
+                    <i class="fa-solid fa-trash"></i>
+                  </button>
+                </td>
+              </tr>
+              <tr *ngIf="employees.length === 0">
+                <td colspan="4" class="text-center py-5">
+                  <img src="assets/img/empty.svg" alt="" style="width: 80px; opacity: 0.5;">
+                  <p class="mt-2 text-muted">Aucun employé importé pour le moment.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  </div>
+</body>
+<app-footer></app-footer>

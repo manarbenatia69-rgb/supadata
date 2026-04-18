@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<head>
+
+              
+               <title>Contact Us - Supadata</title>
+              
+   </head>
+            <body>
+<div class="dizme_tm_all_wrap" data-magic-cursor="show">
+  <div class="dizme_tm_header">
+    <div class="container">
+      <div class="inner">
+        <div class="logo">
+          <a routerLink="/" aria-label="Accueil"><img src="assets/img/logo/logos.png" alt="Supadata" /></a>
+        </div>
+        <div class="menu">
+          <ul class="anchor_nav">
+            <li><a routerLink="/">Home</a></li>
+            <li class="current"><a routerLink="/contact">Contact</a></li>
+            <li class="login_margin"><a routerLink="/login-particulier">Login</a></li>
+            <li class="download_cv"><a routerLink="/register-particulier"><span>Create your card</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dizme_tm_section" id="contact">
+    <div class="dizme_tm_contact ct_contact">
+      <div class="container">
+        <div class="dizme_tm_main_title" data-align="center">
+          <span class="ct_badge">Contact</span>
+          <h3>On vous repond rapidement</h3>
+          <p>Une question, une demo, ou un besoin pour votre equipe ? Envoyez-nous un message. Reponse sous 24h.</p>
+        </div>
+
+        <div class="ct_grid">
+          <div class="ct_left">
+            <div class="ct_cards" aria-label="Coordonnees">
+              <div class="ct_card ct_card--danger">
+                <div class="ct_icon" aria-hidden="true">
+                  <i class="icon-location"></i>
+                </div>
+                <div class="ct_card_body">
+                  <div class="ct_card_title">Adresse</div>
+                  <div class="ct_card_value">Ireland</div>
+                </div>
+              </div>
+
+              <a class="ct_card ct_card--success" href="mailto:contact@supadata.com">
+                <div class="ct_icon" aria-hidden="true">
+                  <i class="icon-mail-1"></i>
+                </div>
+                <div class="ct_card_body">
+                  <div class="ct_card_title">Email</div>
+                  <div class="ct_card_value">contact@supadata.com</div>
+                </div>
+              </a>
+
+              <div class="ct_card ct_card--primary">
+                <div class="ct_icon" aria-hidden="true">
+                  <i class="icon-phone"></i>
+                </div>
+                <div class="ct_card_body">
+                  <div class="ct_card_title">WhatsApp</div>
+                  <div class="ct_card_value">+216 27 239 631</div>
+                  <div class="ct_card_value">+216 22 995 721</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="ct_note">
+              <div class="ct_note_title">Conseil</div>
+              <div class="ct_note_text">Pour une demande entreprise, indiquez le nombre d'utilisateurs et vos objectifs (partage, templates, analytics).</div>
+            </div>
+          </div>
+
+          <div class="ct_right">
+            <form class="ct_form" (ngSubmit)="addNewContact()" [formGroup]="ContactForm" autocomplete="off" novalidate>
+              <div class="ct_form_head">
+                <div class="ct_form_title">Envoyer un message</div>
+                <div class="ct_form_subtitle">Tous les champs sont obligatoires.</div>
+              </div>
+
+              <div class="ct_fields">
+                <div class="ct_field">
+                  <label class="ct_label" for="ct-name">Nom</label>
+                  <input formControlName="nom" id="ct-name" name="name" type="text" placeholder="Votre nom" />
+                  <div class="ct_error" *ngIf="nom?.touched && nom?.invalid">{{ getErrorMessage(nom, 'nom') }}</div>
+                </div>
+
+                <div class="ct_field">
+                  <label class="ct_label" for="ct-email">Email</label>
+                  <input formControlName="email" id="ct-email" name="email" type="email" placeholder="vous@gmail.com" />
+                  <div class="ct_error" *ngIf="email?.touched && email?.invalid">{{ getErrorMessage(email, 'email') }}</div>
+                </div>
+
+                <div class="ct_field">
+                  <label class="ct_label" for="ct-subject">Sujet</label>
+                  <input formControlName="sujet" id="ct-subject" name="subject" type="text" placeholder="Ex: Demande entreprise" />
+                  <div class="ct_error" *ngIf="sujet?.touched && sujet?.invalid">{{ getErrorMessage(sujet, 'sujet') }}</div>
+                </div>
+
+                <div class="ct_field ct_field--full">
+                  <label class="ct_label" for="ct-message">Message</label>
+                  <textarea id="ct-message" name="message" placeholder="Ecrivez votre message..." formControlName="msg"></textarea>
+                  <div class="ct_error" *ngIf="msg?.touched && msg?.invalid">{{ getErrorMessage(msg, 'msg') }}</div>
+                </div>
+              </div>
+
+              <div class="ct_actions">
+                <button type="submit" class="contactBtn" [disabled]="ContactForm.invalid"><span>Envoyer</span></button>
+                <div class="ct_privacy">En envoyant, vous acceptez d'etre contacte par notre equipe.</div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dizme_tm_section">
+    <div class="dizme_tm_copyright">
+      <div class="container">
+        <div class="inner">
+          <div class="left">
+            <p>Developped by <a href="" target="_blank">Amal Ben Salah & Manar Ben Atia</a> &copy; 2025</p>
+          </div>
+          <div class="right"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+            </body>
+            <app-footer></app-footer>
+           
+            

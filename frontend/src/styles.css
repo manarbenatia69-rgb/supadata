@@ -1,0 +1,484 @@
+/* You can add global styles to this file, and also import other style files */
+:host{
+    --lp-primary:#7c6cf2;
+    --lp-secondary:#a6a6a6;
+    --lp-success:#1fe6b2;
+    --lp-danger:#ff7a59;
+    --lp-warning:#ffe033;
+    --lp-info:#00c9ff;
+    --lp-light:#d7d9de;
+    --lp-dark:#a2a6b3;
+    --lp-surface:rgba(255,255,255,.86);
+    --lp-border:rgba(0,0,0,.08);
+    --lp-text:#0f0f12;
+    --lp-muted:#5a5f6a;
+
+    display:block;
+    min-height:100vh
+} 
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow-y: auto; /* Yamna3 el horizontal scroll */
+}
+/* Registration pages (employer / entreprise / particulier) */
+.rbk-register-page {
+  /* Alwen el Theme Claire */
+  --neo-bg: #fdfdfd;                 /* Abyadh nki */
+  --neo-surface: rgba(255, 255, 255, 0.9); /* Surface baydha */
+  --neo-surface-2: #f8f9fa;          /* Gris clair barcha */
+  --neo-border: rgba(78, 76, 76, 0.08); /* Bordure khfifa akhel */
+  --neo-text: #00060f;               /* Katba akhel daken (Slate) */
+  --neo-muted: #d7e2f0;              /* Katba gris (Muted) */
+  --neo-accent: #3b82f6;             /* Bleu classique (f'blast el cyan) */
+  --neo-accent-2: #6366f1;           /* Indigo khfif */
+
+  position: relative;
+  isolation: isolate;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background:  radial-gradient(1000px 560px at 12% 20%, rgba(124,108,242,.26), transparent 58%),
+        radial-gradient(900px 560px at 88% 18%, rgba(255,224,51,.12), transparent 60%),
+        radial-gradient(900px 560px at 75% 90%, rgba(31,230,178,.18), transparent 60%),
+        linear-gradient(180deg, #ffffff 0%, #fbfbff 60%, #ffffff 100%);
+  color: var(--neo-text);
+}
+
+.rbk-register-page::before {
+  content: "";
+  position: absolute;
+  inset: -160px;
+  z-index: -2;
+  background:
+    radial-gradient(800px 420px at 15% 10%, rgba(42, 209, 201, 0.20), transparent 62%),
+    radial-gradient(920px 520px at 85% 20%, rgba(106, 92, 255, 0.18), transparent 64%),
+    radial-gradient(700px 520px at 50% 85%, rgba(42, 209, 201, 0.10), transparent 65%);
+  opacity: 0.95;
+  animation: rbkNeoDrift 18s ease-in-out infinite alternate;
+}
+
+.rbk-register-page::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle at 20% 25%, rgba(255, 255, 255, 0.08), transparent 36%),
+    radial-gradient(circle at 80% 30%, rgba(255, 255, 255, 0.07), transparent 42%),
+    radial-gradient(circle at 60% 80%, rgba(255, 255, 255, 0.05), transparent 42%),
+    linear-gradient(rgba(20, 0, 0, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.015) 1px, transparent 1px);
+  background-size: auto, auto, auto, 46px 46px, 46px 46px;
+  background-position: center, center, center, 0 0, 0 0;
+  opacity: 0.15;
+  mix-blend-mode: overlay;
+  animation: rbkGridMove 26s linear infinite;
+}
+
+.rbk-register-pad {
+  padding-left: clamp(14px, 3.2vw, 56px);
+  padding-right: clamp(14px, 3.2vw, 56px);
+}
+
+.rbk-register-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 22px 0 16px;
+  color: var(--neo-text);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.015);
+  background: transparent !important;
+}
+
+.rbk-register-hero__inner {
+  position: relative;
+  max-width: 1320px;
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 10px;
+}
+
+.rbk-register-hero__home {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(213, 184, 238, 0.55);
+  color: var(--neo-text);
+  border: 1px solid rgba(215, 180, 249, 0.22);
+  box-shadow: 0 16px 42px rgba(205, 145, 248, 0.05);
+  transition: background 120ms ease, transform 120ms ease;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.rbk-register-hero__inner .rbk-register-hero__home {
+  margin-top: 2px;
+}
+
+@media (max-width: 576px) {
+  .rbk-register-hero__home {
+    position: relative;
+    left: auto;
+    top: auto;
+    margin-bottom: 10px;
+  }
+}
+
+.rbk-register-hero__home:hover {
+  background: rgba(207, 155, 235, 0.7);
+  transform: translateY(-1px);
+}
+
+.rbk-register-hero__title {
+  margin: 14px 0 4px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: rgba(0, 7, 16, 0.96);
+  text-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+}
+
+.rbk-register-hero__title::after {
+  content: "";
+  display: block;
+  width: min(320px, 56vw);
+  height: 3px;
+  margin: 12px auto 0 auto;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(56, 2, 144, 0), rgba(247, 144, 0, 0.95), rgba(104, 44, 187, 0.804), rgba(172, 167, 230, 0));
+  box-shadow:none;
+  opacity: 0.5;
+  animation: rbkTitleGlow 4.8s ease-in-out infinite;
+}
+
+.rbk-register-hero__subtitle {
+  margin: 0;
+  opacity: 0.85;
+  max-width: 62ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.rbk-register-hero__art {
+  position: absolute;
+  right: -100px;
+  top: -250px;
+  width: 520px;
+  max-width: 60vw;
+  opacity: 0.16;
+  pointer-events: none;
+  user-select: none;
+  filter: saturate(1.05) contrast(1.05) blur(0.2px);
+  animation: rbkFloat 7.5s ease-in-out infinite;
+}
+
+@media (max-width: 992px) {
+  .rbk-register-hero__art {
+    display: var(--neo-accent-2);
+  }
+}
+
+.rbk-register-page main.container {
+  padding-top: 16px;
+  padding-bottom: 44px;
+  max-width: none;
+}
+
+.rbk-register-page main.container-fluid {
+  padding-top: 16px;
+  padding-bottom: 44px;
+  max-width: none;
+}
+
+.rbk-register-page .form_container {
+  margin: 18px 0 24px 0;
+}
+
+.rbk-register-page #left_form {
+  height: 100%;
+  border-radius: 16px;
+  padding: 22px;
+  background:
+    radial-gradient(900px 520px at 20% 20%, rgba(124,108,242,.22), transparent 55%),
+    radial-gradient(860px 540px at 70% 10%, rgba(0,201,255,.18), transparent 55%),
+        radial-gradient(860px 560px at 60% 90%, rgba(31,230,178,.16), transparent 55%),
+        linear-gradient(180deg, rgba(255,255,255,.65) 0%, rgba(255,255,255,.45) 100%);
+  animation: rbkGlowPulse 4.6s ease-in-out infinite;
+}
+
+.rbk-register-page #left_form h2 {
+  margin-top: 6px;
+  margin-bottom: 10px;
+  color: rgba(0, 5, 12, 0.95);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  font-size: 26px;
+}
+
+.rbk-register-page #left_form p {
+  color: var(--neo-muted);
+  margin: 0 0 10px 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.rbk-register-aside__bullets {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0 0;
+  display: grid;
+  gap: 8px;
+}
+
+.rbk-register-aside__bullets li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: rgba(226, 232, 240, 0.84);
+  font-size: 14px;
+}
+
+.rbk-register-aside__bullets li::before {
+  content: "";
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  margin-top: 2px;
+  border-radius: 6px;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0) 55%),
+    linear-gradient(135deg, rgba(42, 209, 201, 0.95), rgba(106, 92, 255, 0.95));
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.26);
+}
+
+.rbk-register-page .rbk_bloc_left {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-top: 10px;
+  border-radius: 10px;
+ 
+}
+
+.rbk-register-page form#custom {
+  background:rgba(255,255,255,.65);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: 16px;
+  box-shadow: 0 26px 90px rgba(0, 0, 0, 0.35);
+  padding: 20px 18px;
+  backdrop-filter: blur(6px);
+  position: relative;
+}
+
+.rbk-register-page form#custom::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  pointer-events: none;
+  border: 1px solid rgba(42, 209, 201, 0.14);
+  box-shadow: inset 0 0 0 1px rgba(106, 92, 255, 0.10);
+  opacity: 0.9;
+  animation: rbkGlowPulse 5.4s ease-in-out infinite;
+}
+
+.rbk-register-page form#custom legend {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.01em;
+  font-size: 18px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.rbk-register-page .form-group {
+  margin-bottom: 12px;
+}
+
+.rbk-register-page .form-control {
+  border-radius: 12px;
+  border: 0.5px solid rgba(253, 254, 255, 0.789);
+  min-height: 44px;
+  padding: 10px 12px;
+  box-shadow: none;
+  background: rgba(242, 242, 242, 0.559);
+  color: rgba(15, 15, 15, 0.92);
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+
+.rbk-register-page .form-control::placeholder {
+  color: rgb(213, 190, 225);
+}
+
+.rbk-register-page .form-control:focus {
+  border-color: var(--neo-accent) !important;
+    box-shadow: 0 0 0 3px rgba(246, 248, 255, 0.66) !important;
+}
+
+.rbk-register-page .file-upload-label {
+  width: 100%;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  border-radius: 12px;
+  border: 1px dashed#cbd5e1 !important;
+  background: #f1f5f9 !important;
+  color: #475569 !important;
+  font-weight: 800;
+  cursor: pointer;
+  user-select: none;
+  padding: 10px 14px;
+  transition: background 120ms ease, transform 120ms ease, border-color 120ms ease;
+}
+
+.rbk-register-page .file-upload-label:hover {
+  background: rgba(2, 6, 23, 0.48);
+  border-color: rgba(45, 1, 51, 0.55);
+  transform: translateY(-1px);
+}
+
+.rbk-register-page .file-upload-label .plus-icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(81, 0, 135, 0.16);
+  color: rgba(58, 3, 84, 0.95);
+  font-weight: 900;
+}
+
+.rbk-register-page .imgStyle {
+  margin-top: 10px;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  background: rgba(2, 6, 23, 0.30);
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.35);
+}
+
+.rbk-register-page .imgStyle img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.rbk-register-page .suppBtn_rbk {
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  background: rgba(2, 6, 23, 0.38);
+  color: rgba(226, 232, 240, 0.78);
+  border-radius: 999px;
+  padding: 6px 10px;
+  line-height: 1;
+  font-weight: 800;
+}
+
+.rbk-register-page .step {
+  background: transparent;
+  padding: 10px 0;
+  margin-bottom: 0;
+  border-radius: 0;
+}
+
+.rbk-register-page .custom-buttons {
+  margin: 22px 0 0 0;
+}
+
+.rbk-register-page .button-back,
+.rbk-register-page .button-next,
+.rbk-register-page .finish {
+  border-radius: 12px;
+  padding: 12px 18px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.rbk-register-page .button-next,
+.rbk-register-page .finish {
+  background: linear-gradient(135deg, rgb(88, 3, 154), rgba(106, 92, 255, 1));
+}
+
+.rbk-register-page .button-back,
+.rbk-register-page a.button-back {
+  background: rgba(2, 6, 23, 0.40);
+  color: rgba(226, 232, 240, 0.86);
+}
+
+.rbk-register-page .button-back:hover,
+.rbk-register-page .button-next:hover,
+.rbk-register-page .finish:hover {
+  filter: none;
+  transform: translateY(-1px);
+}
+
+@keyframes rbkNeoDrift {
+  from {
+    transform: translate3d(-1.5%, -0.5%, 0) scale(1.02);
+  }
+  to {
+    transform: translate3d(1.5%, 0.8%, 0) scale(1.06);
+  }
+}
+
+@keyframes rbkGridMove {
+  from {
+    background-position: center, center, center, 0 0, 0 0;
+  }
+  to {
+    background-position: center, center, center, 46px 46px, -46px 46px;
+  }
+}
+
+@keyframes rbkGlowPulse {
+  0%,
+  100% {
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+  }
+  50% {
+    box-shadow: 0 26px 92px rgba(0, 0, 0, 0.42), 0 0 0 1px rgba(42, 209, 201, 0.10);
+  }
+}
+
+@keyframes rbkFloat {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, 8px, 0);
+  }
+}
+
+@keyframes rbkTitleGlow {
+  0%,
+  100% {
+    opacity: 0.72;
+    filter: saturate(1) brightness(1);
+  }
+  50% {
+    opacity: 1;
+    filter: saturate(1.2) brightness(1.08);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rbk-register-page::before,
+  .rbk-register-page::after,
+  .rbk-register-hero__art,
+  .rbk-register-page #left_form,
+  .rbk-register-page form#custom::before,
+  .rbk-register-hero__title::after {
+    animation: none !important;
+  }
+}

@@ -1,0 +1,54 @@
+<div class="container mt-4">
+
+<h3>Résultat de recherche : "{{keyword}}"</h3>
+
+<!-- Admin -->
+<div *ngIf="admins.length > 0">
+  <h4>Admins</h4>
+  <ul>
+    <li *ngFor="let a of admins">
+      {{a.nom}} {{a.prenom}}
+    </li>
+  </ul>
+</div>
+
+<!-- Employers -->
+<div *ngIf="employers.length > 0">
+  <h4>Employers</h4>
+  <ul>
+    <li *ngFor="let e of employers">
+      {{e.nom}} {{e.prenom}}
+    </li>
+  </ul>
+</div>
+
+<!-- Entreprises -->
+<div *ngIf="entreprises.length > 0">
+  <h4>Entreprises</h4>
+  <ul>
+    <li *ngFor="let e of entreprises">
+      {{e.companyname}}
+    </li>
+  </ul>
+</div>
+
+<!-- Particuliers -->
+<div *ngIf="particuliers.length > 0">
+  <h4>Particuliers</h4>
+  <ul>
+    <li *ngFor="let p of particuliers">
+      {{p.nom}} {{p.prenom}}
+    </li>
+  </ul>
+</div>
+
+<div *ngIf="
+admins.length==0 &&
+employers.length==0 &&
+entreprises.length==0 &&
+particuliers.length==0
+">
+Aucun résultat trouvé
+</div>
+
+</div>

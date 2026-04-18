@@ -1,0 +1,159 @@
+:host{
+    --lp-primary:#7c6cf2;
+    --lp-secondary:#a6a6a6;
+    --lp-success:#1fe6b2;
+    --lp-danger:#ff7a59;
+    --lp-warning:#ffe033;
+    --lp-info:#00c9ff;
+    --lp-light:#d7d9de;
+    --lp-dark:#a2a6b3;
+    --lp-surface:rgba(255,255,255,.86);
+    --lp-border:rgba(0,0,0,.08);
+    --lp-text:#0f0f12;
+    --lp-muted:#5a5f6a;
+}
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background:  radial-gradient(1000px 560px at 12% 20%, rgba(124,108,242,.26), transparent 58%),
+        radial-gradient(900px 560px at 88% 18%, rgba(255,224,51,.12), transparent 60%),
+        radial-gradient(900px 560px at 75% 90%, rgba(31,230,178,.18), transparent 60%),
+        linear-gradient(180deg, #ffffff 0%, #fbfbff 60%, #ffffff 100%);
+}
+ .dizme_tm_header .logo img{
+        max-width: 133px;
+        max-height: 80px;
+        width: 100px;
+    }
+.dizme_tm_header {
+  background-color: white;
+  padding: 14px 0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+/* Layout Global */
+.choix-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+    padding: 110px;
+}
+
+.choix-container h2 {
+    font-family: 'Jost', sans-serif;
+    font-weight: 700;
+    color: #1a1a1a;
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+/* Cards Container */
+.cards {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    perspective: 1000px; /* For 3D feel */
+}
+
+/* Individual Card Style */
+.card {
+    position: relative;
+    width: 260px;
+    padding: 40px 30px;
+    background:radial-gradient(900px 520px at 20% 20%, rgba(124,108,242,.22), transparent 55%),
+        radial-gradient(860px 540px at 70% 10%, rgba(0,201,255,.18), transparent 55%),
+        radial-gradient(860px 560px at 60% 90%, rgba(31,230,178,.16), transparent 55%),
+        linear-gradient(180deg, rgba(255,255,255,.65) 0%, rgba(255,255,255,.45) 100%);
+    backdrop-filter: blur(10px); /* Glassmorphism */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 24px;
+    text-decoration: none;
+    color: #333;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    overflow: hidden;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+/* Delay animations for each card */
+.card-1 { animation-delay: 0.2s; }
+.card-2 { animation-delay: 0.4s; }
+.card-3 { animation-delay: 0.6s; }
+
+.card:hover {
+    transform: translateY(-15px) scale(1.02);
+    background: #fff;
+    box-shadow: 0 20px 40px rgba(124, 108, 242, 0.15); /* Primary color shadow */
+    border-color: #7c6cf2;
+}
+
+/* Icon Box */
+.icon-box {
+    font-size: 40px;
+    margin-bottom: 20px;
+    background: #f4f2ff;
+    width: 90px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 18px;
+    transition: 0.3s;
+}
+
+.card:hover .icon-box {
+    background: #7c6cf2;
+    color: white;
+    transform: rotate(-10deg);
+}
+
+.card h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #1a1a1a;
+}
+
+.card p {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+/* Arrow indicator */
+.arrow {
+    font-size: 20px;
+    color: #7c6cf2;
+    opacity: 0;
+    transition: 0.3s;
+    display: block;
+}
+
+.card:hover .arrow {
+    opacity: 1;
+    transform: translateX(10px);
+}
+
+/* Keyframes for Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .cards { flex-direction: column; gap: 20px; }
+    .card { width: 100%; max-width: 300px; }
+}

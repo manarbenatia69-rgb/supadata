@@ -1,0 +1,87 @@
+/* خلفية الصفحة */
+.content-page{
+  background:#f6f8fb;
+}
+
+/* card */
+.iq-card{
+  border-radius:12px;
+  border:none;
+  box-shadow:0 6px 20px rgba(0,0,0,0.06);
+  background:white;
+}
+
+/* عنوان */
+.card-title{
+  color:var(--iq-primary);
+  font-weight:600;
+}
+
+/* search box */
+.dataTables_filter input{
+  border-radius:8px;
+  border:1px solid #ddd;
+  padding:8px 12px;
+  transition:0.3s;
+}
+
+.dataTables_filter input:focus{
+  border-color:var(--iq-primary);
+  box-shadow:0 0 0 0.15rem rgba(0,0,0,0.05);
+}
+
+/* table */
+.table{
+  border-radius:10px;
+  overflow:hidden;
+}
+
+/* header table */
+.table thead{
+  background:var(--iq-primary);
+  color:white;
+}
+
+.table thead th{
+  border:none;
+  font-weight:500;
+}
+
+/* rows */
+.table tbody tr{
+  transition:0.2s;
+}
+
+.table tbody tr:hover{
+  background:#f2f5ff;
+}
+
+/* cellules */
+.table td{
+  vertical-align:middle;
+}
+
+/* boutons */
+.btn-success{
+  background:var(--iq-primary);
+  border:none;
+  border-radius:6px;
+  padding:6px 14px;
+}
+
+.btn-success:hover{
+  background:var(--iq-primary-hover);
+}
+
+/* delete button */
+.btn-danger{
+  border-radius:6px;
+  padding:6px 14px;
+  margin-left:6px;
+}
+
+/* id badge style */
+.table td:first-child{
+  font-weight:600;
+  color:var(--iq-primary);
+}

@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+    <!-- Mirrored from templates.iqonic.design/server360/html-dark/sign-in.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 28 Jan 2026 10:39:21 GMT -->
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title></title>
+    </head>
+    <body>
+        <div id="loading">
+            <div id="loading-center"></div>
+        </div>
+        <!-- loader END -->
+
+        <!-- Sign in Start -->
+        <section class="sign-in-page">
+            <div class="container p-0" id="sign-in-page-box">
+                <div class="bg-white form-container sign-up-container">
+                    <div class="sign-in-page-data">
+                        <div class="sign-in-from w-100 m-auto">
+                            <h1 class="mb-3 text-center">Sign Up</h1>
+                            <p class="text-center text-dark">Enter your email address and password to access admin panel.</p>
+                            <form (ngSubmit)="login()" [formGroup]="loginForm">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Your Full Name</label>
+                                    <input type="email" formControlName="email" class="form-control mb-0" id="exampleInputEmail1" placeholder="Your Full Name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail2">Email address</label>
+                                    <input type="email" class="form-control mb-0" id="exampleInputEmail2" placeholder="Enter email">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Password</label>
+                                    <input type="password" formControlName="pwd" class="form-control mb-0" id="exampleInputPassword1" placeholder="Password">
+                                </div>
+                                <div class="d-inline-block w-100">
+                                    <div class="custom-control custom-checkbox d-inline-block mt-2 pt-1">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                        <label class="custom-control-label" for="customCheck1">I accept <a href="#">Terms and Conditions</a></label>
+                                    </div>
+                                </div>
+                                <div class="sign-info">
+                                    <button type="submit" class="btn btn-primary mb-2">Sign Up</button>
+                                    <span class="text-dark d-block line-height-2">Already Have Account ? <a href="#">Log In</a></span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white form-container sign-in-container">
+                    <div class="sign-in-page-data">
+                        <div class="sign-in-from w-100 m-auto">
+                            <h1 class="mb-3 text-center">Sign in</h1>
+                            <p class="text-center text-dark">Enter your email address and password to access admin panel.</p>
+                            <form (ngSubmit)="login()" [formGroup]="loginForm">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail2">Email address</label>
+                                    <input type="email" formControlName="email" class="form-control mb-0" id="exampleInputEmail2" placeholder="Enter email">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword2">Password</label>
+                                    <a href="#" class="float-right">Forgot password?</a>
+                                    <input type="password" formControlName="pwd" class="form-control mb-0" id="exampleInputPassword2" placeholder="Password">
+                                </div>
+                                <div class="d-inline-block w-100">
+                                    <div class="custom-control custom-checkbox d-inline-block mt-2 pt-1">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck2">
+                                        <label class="custom-control-label" for="customCheck2">Remember Me</label>
+                                    </div>
+                                </div>
+                                <div class="sign-info">
+                                    <button type="submit" class="btn btn-primary mb-2">Sign in</button>
+                                    <span class="text-dark dark-color d-block line-height-2">Don't have an account? <a href="#">Sign up</a></span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+               <div class="overlay-container">
+    <div class="overlay">
+
+        <!-- Left -->
+        <div class="overlay-panel overlay-left">
+
+            <img src="assets/images/logoad.png"
+                 class="login-logo"
+                 alt="logo">
+
+            <h3 class="login-title">Carte de visite numérique</h3>
+
+            <p class="login-quote">
+                Transformez votre identité professionnelle en une carte de visite digitale moderne.
+                Partagez votre profil, vos liens et vos contacts en un seul clic.
+            </p>
+
+            <button class="btn login-btn-outline" id="signIn">
+                Se connecter
+            </button>
+
+        </div>
+
+
+        <!-- Right -->
+        <div class="overlay-panel overlay-right">
+
+            <img src="assets/images/logoad.png"
+                 class="login-logo"
+                 alt="logo">
+
+            <h3 class="login-title">Créez votre profil digital</h3>
+
+            <p class="login-quote">
+               "Transformez votre identité professionnelle en carte de visite numérique 
+               et partagez-la en un instant."
+            </p>
+
+            
+
+        </div>
+
+    </div>
+
+                </div>
+            </div>
+        </section>
+    </body>
+</html>

@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+     <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <title></title> 
+   </head>
+   <body class="sidebar-main-active right-column-fixed">
+      <div id="loading">
+         <div id="loading-center">
+         </div>
+      </div>
+      <div class="wrapper">
+         <app-menu>   </app-menu>
+        <app-header> </app-header>
+      
+         <div id="content-page" class="content-page">
+            <div class="container-fluid">
+               <div class="row">
+                  <div class="col-sm-12 col-lg-12">
+                     <div class="iq-card">
+                        <div class="iq-card-header d-flex justify-content-between">
+                           <div class="iq-header-title">
+                              <h4 class="card-title">Tables</h4>
+                           </div>
+                        </div>
+                        <div class="iq-card-body">
+                           <p>Liste des Contacts</p>
+                            <div class="col-sm-12 col-md-6">
+                                 <div id="user_list_datatable_info" class="dataTables_filter">
+                                    <form class="mr-3 position-relative">
+                                       <div class="form-group mb-0">
+                                         <input type="search"
+                                           class="form-control"
+                                                placeholder="Rechercher" >
+                                       </div>
+                                    </form>
+                                 </div>
+                              </div>
+                              <hr>
+                           <table class="table table-hover table-striped">
+                              <thead>
+                                 <tr>
+                                    <th scope="col">id</th>
+                                    <th scope="col">nom</th>
+                                    <th scope="col">email</th>
+                                    <th scope="col">sujet</th>
+                                    <th scope="col">message</th>
+                                    <th scope="col">Action</th>
+
+                                   
+                                 </tr>
+                              </thead>
+                              <tbody>
+                                 <tr *ngFor="let contact of listContact">
+                                    
+                                    <td>{{contact.id}}</td>
+                                    <td>{{contact.nom}}</td>
+                                    <td>{{contact.email}}</td>
+                                    <td>{{contact.sujet}}</td>
+                                    <td>{{contact.msg}}</td>
+                                        <td>
+                                 <a href="" type="submit" class="btn btn-success"> Modifier</a>
+                                      <button type="submit" (click)="DeleteContact(contact)" class="btn btn-danger">Supprimer</button>
+                                    </td>
+                                 </tr>
+                                 </tbody>
+                           </table>
+                        </div>
+                     </div>
+                  </div> 
+               </div>
+            </div>
+         </div>
+      </div>
+      <app-footer>   </app-footer>
+        </body>
+</html>
+                                     

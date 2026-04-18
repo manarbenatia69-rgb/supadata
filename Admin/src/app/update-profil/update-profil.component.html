@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <title></title>
+   </head>
+   <body>
+      <div class="wrapper">
+       <app-menu>   </app-menu> 
+       <app-header></app-header>  
+   <div id="content-page" class="content-page">
+      <div class="container-fluid">
+         <div class="row">
+            <div class="col-sm-12">
+                
+            <div class="container update-profile-container">
+
+               <div class="row gutters">
+
+         <!-- LEFT PROFILE -->
+           <div class="col-xl-3 col-lg-3 col-md-12">
+
+                <div class="card profile-card-left">
+            <div class="card-body">
+               <div class="user-profile">
+                  <div class="user-avatar">
+                      <img src="assets/images/user/user.png" class="profile-img" alt="user">
+                  </div>
+
+             <h5 class="user-name">
+{{ adminDetails.nom }} {{ adminDetails.prenom }}
+</h5>
+
+<h6 class="user-email">
+{{ adminDetails.email }}
+</h6>
+
+</div>
+
+</div>
+</div>
+
+</div>
+
+
+<!-- RIGHT FORM -->
+<div class="col-xl-9 col-lg-9 col-md-12">
+
+<div class="card profile-card-right">
+
+<form (ngSubmit)="updateadmin()" [formGroup]="updateadminForm">
+
+<div class="card-body">
+
+<h5 class="section-title">Modifier Profil</h5>
+
+<div class="row">
+
+<div class="col-md-6">
+<div class="form-group">
+<label>Nom</label>
+<input formControlName="nom"
+type="text"
+class="form-control"
+placeholder="Nom">
+</div>
+</div>
+
+<div class="col-md-6">
+<div class="form-group">
+<label>Prénom</label>
+<input formControlName="prenom"
+type="text"
+class="form-control"
+placeholder="Prénom">
+</div>
+</div>
+
+<div class="col-md-6">
+<div class="form-group">
+<label>Email</label>
+<input formControlName="email"
+type="email"
+class="form-control"
+placeholder="Email">
+</div>
+</div>
+
+<div class="col-md-6">
+<div class="form-group">
+<label>Role</label>
+<input type="text"
+class="form-control"
+[value]="currentRole"
+readonly>
+</div>
+</div>
+
+<div class="col-md-6">
+<div class="form-group">
+<label>Mot de passe</label>
+<input formControlName="pwd"
+type="password"
+class="form-control"
+placeholder="Mot de passe">
+</div>
+</div>
+
+</div>
+
+
+<div class="form-buttons">
+
+<button type="button" class="btn-cancel">
+Annuler
+</button>
+
+<button type="submit" class="btn-save">
+Modifier
+</button>
+
+</div>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+			</div>
+         </div>
+      </div>
+   </div>
+   </div>
+      <app-footer></app-footer>    
+   </body>
+</html>

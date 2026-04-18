@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <title></title>
+   </head>
+   <body>
+      <div id="loading">
+         <div id="loading-center">
+         </div>
+      </div>
+      <!-- loader END -->
+      <!-- Wrapper Start -->
+      <div class="wrapper">
+      <!-- Sidebar  -->
+       <app-menu></app-menu>
+         <!-- TOP Nav Bar -->
+        <app-header></app-header>
+         <!-- TOP Nav Bar END -->
+      <!-- Page Content  -->
+   <div id="content-page" class="content-page">
+      <div class="container-fluid">
+         <div class="row">
+            <div class="col-lg-3">
+                  <div class="iq-card">
+                     <div class="iq-card-header d-flex justify-content-between">
+                        <div class="iq-header-title">
+                           <h4 class="card-title"> Modifier Entreprise</h4>
+                        </div>
+                     </div>
+                     <div class="iq-card-body">
+                        <form (ngSubmit)="updateEntreprise()" [formGroup]="entrepriseForm"> <!-- Form for adding new user -->
+                           <div class="form-group">
+                              <div class="add-img-user profile-img-edit">
+                                <img class="profile-pic img-fluid w-100" 
+     [src]="entrepriseForm.value.profilepicture || 'assets/default-profile.png'" 
+     alt="profile-pic">
+                                 <div class="p-image">
+                                   <a href="javascript:void();" class="upload-button btn iq-bg-primary">Ajouter photo de profil</a>
+                                   <input formControlName="profilepicture" class="file-upload" type="file" accept="image/*">
+                                </div>
+                              </div>
+                              <div class="add-img-user profile-img-edit">
+                                <img class="cover-pic img-fluid w-100" 
+     [src]="entrepriseForm.value.coverphoto || 'assets/default-cover.png'" 
+     alt="cover-pic">
+                                 <div class="p-image">
+                                   <a href="javascript:void();" class="upload-button btn iq-bg-primary">Ajouter photo de couverture</a>
+                                   <input formControlName="coverphoto" class="file-upload" type="file" accept="image/*">
+                                </div>
+                                <div class="add-img-user profile-img-edit">
+                                 <img class="logo-pic img-fluid" 
+     [src]="entrepriseForm.value.companylogo || 'assets/default-logo.png'" 
+     alt="logo-pic">
+                                 <div class="p-image">
+                                   <a href="javascript:void();" class="upload-button btn iq-bg-primary">Ajouter logo d'entreprise</a>
+                                   <input formControlName="companylogo" class="file-upload" type="file" accept="image/*">
+                                </div>
+                              </div>
+                           </div>
+                           </div>
+                           
+                           
+                           <div class="form-group">
+                              <label for="furl">Facebook Url:</label>
+                              <input formControlName="facebooklink" type="text" class="form-control" id="furl" placeholder="Facebook Url">
+                           </div>
+                           <div class="form-group">
+                              <label for="gurl">Github Url:</label>
+                              <input formControlName="githublink" type="text" class="form-control" id="gurl" placeholder="Github Url">
+                           </div>
+                           <div class="form-group">
+                              <label for="lurl">Linkedin Url:</label>
+                              <input formControlName="linkedinlink" type="text" class="form-control" id="lurl" placeholder="Linkedin Url">
+                           </div>
+                           <div class="form-group">
+                              <label for="curl">Company Url:</label>
+                              <input formControlName="urlcompany" type="text" class="form-control" id="curl" placeholder="Company Url">
+                           </div>
+                        </form>
+                     </div>
+                  </div>
+            </div>
+            <div class="col-lg-8">
+                  <div class="iq-card">
+                     <div class="iq-card-header d-flex justify-content-between">
+                        <div class="iq-header-title">
+                           <h4 class="card-title">Entreprise Information</h4>
+                        </div>
+                     </div>
+                     <div class="iq-card-body">
+                        <div class="new-user-info">
+                           <form (ngSubmit)="updateEntreprise()" [formGroup]="entrepriseForm"> 
+                              <div class="row">
+                                 <div class="form-group col-md-6">
+                                    <label for="fname">First Name:</label>
+                                    <input formControlName="nom" type="text" class="form-control" id="fname" placeholder="First Name">
+                                 </div>  
+                                 
+                                 <div class="form-group col-md-6">
+                                    <label for="add1">Job Title:</label>
+                                    <input formControlName="jobtitle" type="text" class="form-control" id="add1" placeholder="Job Title">
+                                 </div>
+                                 <div class="form-group col-md-6">
+                                    <label for="add2">Department:</label>
+                                    <input formControlName="departement" type="text" class="form-control" id="add2" placeholder="Department">
+                                 </div>
+                                 <div class="form-group col-md-6">
+                                    <label for="cname">Company Name:</label>
+                                    <input formControlName="companyname" type="text" class="form-control" id="cname" placeholder="Company Name">
+                                 </div>
+                                 <div class="form-group col-md-6">
+                                    <label for="email">Email:</label>
+                                    <input formControlName="email" type="email" class="form-control" id="email" placeholder="Email">
+                                 </div>
+                                  <div class="form-group col-md-6">
+                                    <label for="pass">Password:</label>
+                                    <input formControlName="pwd" type="password" class="form-control" id="pass" placeholder="Password">
+                                 </div>
+                                 <div class="form-group col-md-6">
+                                    <label for="mobno">Telephone:</label>
+                                    <input formControlName="telephone" type="text" class="form-control" id="mobno" placeholder="Telephone">
+                                 </div>
+                                 <div class="form-group col-md-6">
+                                    <label for="city">Adresse:</label>
+                                    <input formControlName="adresse" type="text" class="form-control" id="city" placeholder="Adresse">
+                                 </div>
+                                 <div class="col-md-6 mb-3">
+                                   <label>Theme color</label>
+                                   <input formControlName="color" type="color" class="form-control">
+                                 </div>
+                                 <div class="col-md-6 mb-3">
+                                 <label>Font family</label>
+                                 <input formControlName="police" type="text" class="form-control">
+                                 </div>
+                              <div class="checkbox">
+                                 <label><input class="mr-2" type="checkbox">Enable Two-Factor-Authentication</label>
+                              </div>
+                              <br>
+                              <button type="submit" class="btn btn-primary">Modifier</button>
+                          </div> 
+                        </form>
+                        </div>
+                     </div>
+                  </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   </div>
+   <!-- Wrapper END -->
+    <!-- Footer -->
+   <app-footer></app-footer>
+   </body>
+</html>
+

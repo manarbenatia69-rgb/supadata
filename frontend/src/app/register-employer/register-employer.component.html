@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+
+	<meta name="author" content="Ansonika">
+	<title>- Sign In</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	
+</head>
+<body>
+	
+<div class="min-vh-100 d-flex flex-column rbk-register-page">
+	 
+
+	<section class="rbk-register-hero">
+		<div class="container-fluid rbk-register-hero__inner rbk-register-pad">
+			<a class="rbk-register-hero__home" routerLink="/">&larr; Home</a>
+			<h1 class="rbk-register-hero__title">Inscription Employeur</h1>
+			<p class="rbk-register-hero__subtitle">Un formulaire clair, rapide et bien organisé pour créer votre profil.</p>
+			<img class="rbk-register-hero__art" src="assets/rbk_style/img/rbk-img/2.png"  >
+		</div>
+	</section>
+	<div class="d-flex flex-column my-auto">
+		<main class="container-fluid rbk-register-pad">
+					    <div class="row g-2 g-xl-3 align-items-stretch">
+		        <div class="col-12">
+		            <div class="form_container">
+		                <div class="row g-2 g-xl-3 align-items-stretch">
+		                    <div class="col-lg-4 col-xl-3">
+		                        <div id="left_form">
+									<h2>Créez votre profil</h2>
+									
+		                            <img src="assets/rbk_style/img/rbk-img/1.png" class="rbk_bloc_left" alt="Registration illustration" loading="lazy">
+		                        </div>
+		                    </div>
+		                    <div class="col-lg-7 col-xl-8">
+		                        <form (ngSubmit)="addNewEmployer()" [formGroup]="employerForm" id="custom" action="" method="POST" enctype="multipart/form-data">
+                                    <input type="hidden" name="_token" value="B8PTcxNjjcvDMPcgBdSei2PFuUIlub0utu604Mkt">		 
+									<input id="website" name="website" type="text" value=""><!-- Leave for security protection, read docs for details. Delete this comment before to publish. -->
+		                            <fieldset title="Step 1">
+									  <div class="rbk-step-wizard mb-4">
+                                        <div class="step-item active"></div>
+										 <span class="step-num">Step 1</span>
+		                                  <legend>Personal info</legend>
+									    </div>
+									
+										
+		                                <div class="row row_rbk">
+
+		                                	<div class="col-md-4">
+												<div class="form-group">
+
+												    <input (change)="onFileSelected($event, 'profilepicture')" formControlName="profilepicture" type="file" id="profilePictureInput"  name="profilepicture" accept="image/*" style="display: none;">
+
+												    <label for="profilePictureInput" class="file-upload-label">
+												        <span class="plus-icon">+</span> Profile Picture
+												    </label>
+												    <button id="clearProfilePictureButton" class="suppBtn_rbk" style="display: none;">X</button>
+												</div>
+												<div id="profilePictureContainer" class="imgStyle" style="display: none;">
+
+												</div>
+
+		                                    </div>
+
+		                                    <div class="col-md-4">
+												<div class="form-group">
+
+												    <input (change)="onFileSelected($event, 'companylogo')" formControlName="companylogo" type="file" id="companyLogoInput" name="companylogo" accept="image/*" style="display: none;">
+												    <label for="companyLogoInput" class="file-upload-label">
+												        <span class="plus-icon">+</span> Company Logo
+												    </label>
+												    <button id="clearCompanyLogoButton" class="suppBtn_rbk" style="display: none;">X</button>
+												</div>
+												<div id="companyLogoContainer" class="imgStyle" style="display: none;">
+
+												</div>
+
+		                                    </div>
+
+		                                    <div class="col-md-4">
+												<div class="form-group">
+
+												    <input (change)="onFileSelected($event, 'coverphoto')" formControlName="coverphoto" type="file" id="coverPhotoInput" name="coverphoto" accept="image/*" style="display: none;">
+												    <label for="coverPhotoInput" class="file-upload-label">
+												        <span class="plus-icon">+</span> Cover photo
+												    </label>
+												    <button id="clearCoverPhotoButton" class="suppBtn_rbk" style="display: none;">X</button>
+												</div>
+												<div id="coverPhotoContainer" class="imgStyle" style="display: none;">
+
+												</div>
+
+		                                    </div>
+		                                </div>
+		                                <!-- /row -->
+		                                <div class="row">
+		                                	 <div class="col-md-4">
+		                                        <div class="form-group">
+		                                            <input formControlName="nom" type="text" name="name" class="form-control" placeholder="First Name (*)">
+		                                        </div>
+
+											 </div>
+
+		                                    <div class="col-md-4">	
+												<div class="form-group">
+		                                            <input formControlName="prenom" type="text" name="prenom" class="form-control" placeholder="Last Name (*)">
+		                                        </div>
+		                                    </div>
+										
+										
+		                                    <div class="col-md-4">
+		                                        <div class="form-group">
+		                                            <input formControlName="jobtitle" type="text" name="jobtitle" class="form-control" placeholder="Job Title (*)">
+		                                        </div>
+		                                    </div>
+
+		                                    <div class="col-md-4">
+		                                        <div class="form-group">
+		                                            <input formControlName="departement" type="text" name="department" class="form-control" placeholder="Department">
+		                                        </div>
+		                                    </div>
+		                                	<div class="col-md-4">
+		                                        <div class="form-group">
+		                                            <input formControlName="companyname" type="text" name="company_name" class="form-control" placeholder="Company Name (*)">
+		                                        </div>
+		                                    </div>
+
+		                                   
+
+		                                    <div class="col-md-4">
+		                                        <div class="form-group">
+		                                            <input formControlName="telephone" type="tel" name="telephone" class="form-control" placeholder="Phone (*)" id="phone">
+		                                        </div>
+		                                    </div>
+
+		                                </div>
+		                                <!-- /row -->
+		                                <div class="row">
+		                                	<div class="col-md-4">
+		                                        <div class="form-group">
+		                                            <input formControlName="urlcompany" type="text" name="company_url" class="form-control" placeholder="Url Company (*)" onclick="afficherURL()" id="company_url">
+		                                        </div>
+		                                    </div>
+		                                    <div class="col-md-4">
+		                                        <div class="form-group">
+		                                            <input formControlName="adresse" type="text" name="address" class="form-control" placeholder="Address">
+		                                        </div>
+		                                    </div>
+                                        </div>
+											<div class="row">
+		                                    <div class="col-md-4">
+		                                        <div class="form-group">
+		                                            <input formControlName="pwd" type="password" name="password" class="form-control" placeholder="Password (*)">
+		                                        </div>
+		                                    </div> <div class="col-md-4">
+		                                        <div class="form-group">
+		                                            <input formControlName="email" type="email" name="email" class="form-control" placeholder="Email (*)">
+		                                        </div>
+		                                    </div>
+		                                    <div class="col-md-6">
+		                                        <div class="form-group">
+		                                        	<label class="labelCss">Color</label>
+		                                            <input type="color" name="color" class="form-control" placeholder="Color">
+		                                        </div>
+		                                    </div>
+		                                    <div class="col-md-6">
+		                                        <div class="form-group">
+		                                        	<label class="labelCss">Police</label>
+		                                            <select formControlName="police" class="form-control" name="police">
+		                                            	<option value="'Arial', sans-serif">Arial</option>
+		                                            	<option value="'Helvetica', sans-serif">Helvetica</option>
+
+		                                            	<option value="'Times New Roman', serif">
+		                                            		Times New Roman
+		                                            	</option>
+		                                            	<option value="'Verdana', sans-serif">
+		                                            		Verdana
+		                                            	</option>
+		                                            	<option value="'Georgia', serif">
+		                                            		Georgia
+		                                            	</option>
+		                                            	<option value="'Roboto', sans-serif">
+		                                            		Roboto
+		                                            	</option>
+		                                            	<option value="'Open Sans', sans-serif">
+		                                            		Open Sans
+		                                            	</option>
+		                                            	<option value="'Lato', sans-serif">
+		                                            		Lato
+		                                            	</option>
+		                                            	<option value="'Roboto Slab', serif">
+		                                            		Roboto Slab
+		                                            	</option>
+		                                            </select>
+		                                        </div>
+		                                    </div>
+		                                </div>
+
+		                            </fieldset>
+									                          <!-- End Step one -->
+		                            <fieldset title="Step 2">
+										<div class="step-item">
+										<span class="step-num">Step 2</span>
+		                            
+		                                <legend>Social</legend>
+										</div>
+		                                <div class="row">
+		                                    <div class="col-md-6">
+		                                        <div class="form-group form_group_rbk">
+									                <label for="facebook">
+									                    <i class="bi bi-facebook social-icon"></i>
+									                </label>
+									                <input formControlName="fblink" type="text"  id="facebook" name="facebooklink" placeholder="facebook Link" class="form-control">
+									            </div>
+		                                    </div> 
+		                                    <div class="col-md-6">
+		                                        <div class="form-group form_group_rbk">
+									                <label for="linkedin">
+									                    <i class="bi bi-linkedin social-icon"></i>
+									                </label>
+									                <input formControlName="linkedinlink" type="text" id="linkedin" name="linkedinlink" placeholder="Linkedin Link" class="form-control">
+									            </div>
+		                                    </div>
+		                                </div>
+										
+		                                <legend>Business</legend>
+		                                
+		                                	<div class="col-md-12">
+		                                        <div class="form-group form_group_rbk">
+									                <label for="github">
+									                    <i class="bi bi-github social-icon"></i>
+									                </label>
+									                <input formControlName="githublink" type="text" id="github"  name="githublink" placeholder="Github Link" class="form-control">
+									            </div>
+		                                    </div>
+		                               
+		                            </fieldset>
+		                            <input type="submit" class="finish" value="Finish!">
+		                        </form>
+		                    </div>
+		                </div><!-- /Row -->
+		            </div><!-- /Form_container -->
+		        </div>
+		    </div>
+		    <!-- End row -->
+		</main>
+	</div>
+	<!-- /flex-column -->
+
+	  <app-footer></app-footer>    
+    <!-- /Footer -->
+
+    </div>
+	<!-- /flex-column -->
+
+	<div class="cd-overlay-nav">
+		<span></span>
+	</div>
+	
+	<!-- cd-overlay-nav -->
+
+	<div class="cd-overlay-content">
+		<span></span>
+	</div>
+	<!-- cd-overlay-content -->
+
+</body>
+</html>
