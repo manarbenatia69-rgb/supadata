@@ -1,73 +1,66 @@
 pipeline {
     agent any
 
-    environment {
-        BACKEND_DIR = "Admin"
-        FRONTEND_DIR = "frontend"
-    }
-
     stages {
 
-        stage('Checkout Code') {
+        stage('Checkout') {
             steps {
-                echo "📥 Cloning project from GitHub..."
-                git branch: 'main',
-                    url: 'https://github.com/manarbenatia69-rgb/supadata.git'
+                git 'https://github.com/manarbenatia69-rgb/supadata.git'
             }
         }
 
-        stage('Backend Build (Admin)') {
+        stage('Backend Build') {
             steps {
-                dir("${BACKEND_DIR}") {
-                    echo "⚙️ Building Backend..."
-
-                    script {
-                        if (fileExists('pom.xml')) {
-                            echo "✔ Maven project detected"
-                            sh 'mvn clean install -DskipTests || echo "Build completed with warnings"'
-                        } else {
-                            echo "⚠ No Maven detected → safe mode"
-                            sh 'echo Backend OK'
-                        }
-                    }
+                dir('Admin') {
+                    sh 'mvn clean package -DskipTests'
                 }
             }
         }
 
         stage('Frontend Build') {
             steps {
-                dir("${FRONTEND_DIR}") {
-                    echo "⚙️ Building Frontend..."
-
-                    script {
-                        if (fileExists('package.json')) {
-                            echo "✔ Node project detected"
-                            sh 'echo "Frontend build simulated (safe mode)"'
-                        } else {
-                            echo "⚠ No Node detected → safe mode"
-                            sh 'echo Frontend OK'
-                        }
-                    }
+                dir('frontend') {
+                    sh 'npm install'
+                    sh 'npm run build'
                 }
             }
         }
 
-        stage('Final Status') {
+        stage('Docker Build Backend') {
             steps {
-                echo "🎯 Pipeline executed successfully"
-                echo "✔ Backend checked"
-                echo "✔ Frontend checked"
+                dir('Admin') {
+                    sh 'docker build -t backend-app .'
+                }
+            }
+        }
+
+        stage('Docker Build Frontend') {
+            steps {
+                dir('frontend') {
+                    sh 'docker build -t frontend-app .'
+                }
+            }
+        }
+
+        stage('Run Containers') {
+            steps {
+                sh '''
+                    docker stop backend || true
+                    docker stop frontend || true
+
+                    docker rm backend || true
+                    docker rm frontend || true
+
+                    docker run -d -p 8081:8081 --name backend backend-app
+                    docker run -d -p 4200:80 --name frontend frontend-app
+                '''
             }
         }
     }
 
     post {
         success {
-            echo "✅ BUILD SUCCESS - Project ready for deployment"
-        }
-
-        failure {
-            echo "❌ BUILD FAILED - Check logs"
+            echo '🎯 PIPELINE SUCCESS - FULL DEVOPS DEPLOYED'
         }
     }
 }
