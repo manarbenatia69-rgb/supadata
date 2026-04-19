@@ -17,7 +17,7 @@ pipeline {
 
         stage('Backend Build') {
             steps {
-                dir('supadata') {
+                dir('supadata') {   // <-- هذا folder متاع backend (بدّلها إذا اسمها مختلف)
                     sh 'mvn clean package -DskipTests'
                 }
             }
