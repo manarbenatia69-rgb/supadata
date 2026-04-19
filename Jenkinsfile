@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         // الـ Registry متاعك أو اسم الـ Image (اختياري)
-        DOCKER_COMPOSE_FILE = 'docker-compose.yml'
+        DOCKER_COMPOSE_FILE = 'docker compose.yml'
     }
 
     stages {
@@ -28,7 +28,7 @@ pipeline {
                 script {
                     // الكومند هذي باش تعمل Build للـ Dockerfiles الكل (Admin, Frontend, Backend)
                     // وتشعلهم الكل مع الـ Database
-                    sh 'docker-compose up -d --build'
+                    sh 'docker compose up -d --build'
                 }
             }
         }
