@@ -7,11 +7,17 @@ services:
       MYSQL_DATABASE: supadata
     ports:
       - "3307:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
 
   backend-api:
     build: ./supadata
+    container_name: pfetest-backend-api-1
     depends_on:
-      - db
+      db:
+        condition: service_healthy  # يخلي الـ Java تستنى لين الـ MySQL يحضر 100%
     ports:
       - "8081:8081"
     environment:
