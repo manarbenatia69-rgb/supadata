@@ -4,7 +4,6 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                // يجبد الكود من GitHub
                 checkout scm
             }
         }
@@ -12,11 +11,11 @@ pipeline {
         stage('Build & Deploy') {
             steps {
                 script {
-                    // نخدمو الـ Maven والـ Docker بـ "bat" متاع الويندوز طول
-                    // هكا ما نستحقوش Permissions وسط Jenkins
-                    bat 'mvn -f supadata/pom.xml clean package -DskipTests'
-                    bat 'docker-compose down'
-                    bat 'docker-compose up -d --build'
+                    // استعملنا "sh" في بلاصة "bat" خاطر Jenkins يخدم بـ Linux
+                    // واستعملنا "mvn" و "docker" اللي موجودين وسط الـ Container
+                    sh 'mvn -f supadata/pom.xml clean package -DskipTests'
+                    sh 'docker-compose down'
+                    sh 'docker-compose up -d --build'
                 }
             }
         }
