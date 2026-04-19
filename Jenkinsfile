@@ -23,16 +23,13 @@ pipeline {
         }
 
         stage('Build & Deploy Containers') {
-            steps {
-                script {
-                    // نزيدو الـ PATH باش الـ Jenkins يلقى الـ Docker وين ما كان مخبي
-                    withEnv(['PATH+EXTRA=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin']) {
-                        // جربي الـ Compose بالـ مطة أو بلاش، الكومند هذي تجربهم الزوز
-                        sh 'docker-compose up -d --build || docker compose up -d --build'
-                    }
-                }
-            }
+    steps {
+        script {
+            // استعملي docker compose (بالفراغ) موش docker-compose (بالخط)
+            sh 'docker compose up -d --build'
         }
+    }
+}
 
         stage('Verify') {
             steps {
