@@ -1,13 +1,16 @@
-version: '3'
-
 services:
+  db:
+    image: mysql:8.0
+    container_name: mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: supadata
+    ports:
+      - "3307:3306"
 
-  backend:
-    build: ./Admin
+  backend-api:
+    build: ./supadata  # <--- thabbet li esm el dossier s'hih houni
+    depends_on:
+      - db
     ports:
       - "8081:8081"
-
-  frontend:
-    build: ./frontend
-    ports:
-      - "4200:80"
