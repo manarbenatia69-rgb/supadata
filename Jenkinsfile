@@ -2,21 +2,20 @@ pipeline {
     agent any
 
     environment {
-        // الـ Registry متاعك أو اسم الـ Image (اختياري)
-        DOCKER_COMPOSE_FILE = 'docker compose.yml'
+        // تأكدي إن اسم الملف فيه مطة موش فراغ
+        DOCKER_COMPOSE_FILE = 'docker-compose.yml'
     }
 
     stages {
         stage('Checkout') {
             steps {
-                // سحب الكود من GitHub
                 checkout scm
             }
         }
 
         stage('Build Backend') {
             steps {
-                dir('supadata') { // يدخل لمجلد الـ Spring Boot
+                dir('supadata') {
                     sh 'chmod +x mvnw'
                     sh './mvnw clean package -DskipTests'
                 }
@@ -26,27 +25,30 @@ pipeline {
         stage('Build & Deploy Containers') {
             steps {
                 script {
-                    // الكومند هذي باش تعمل Build للـ Dockerfiles الكل (Admin, Frontend, Backend)
-                    // وتشعلهم الكل مع الـ Database
-                    sh 'docker compose up -d --build'
+                    // نزيدو الـ PATH باش الـ Jenkins يلقى الـ Docker وين ما كان مخبي
+                    withEnv(['PATH+EXTRA=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin']) {
+                        // جربي الـ Compose بالـ مطة أو بلاش، الكومند هذي تجربهم الزوز
+                        sh 'docker-compose up -d --build || docker compose up -d --build'
+                    }
                 }
             }
         }
 
-        stage('Verify Containers') {
+        stage('Verify') {
             steps {
-                // باش تتأكدي إنو الـ 4 Containers يخدموا
-                sh 'docker ps'
+                withEnv(['PATH+EXTRA=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin']) {
+                    sh 'docker ps'
+                }
             }
         }
     }
 
     post {
         success {
-            echo 'Project Deployed Successfully! Admin on 4201, Frontend on 4200'
+            echo 'Project Deployed Successfully!'
         }
         failure {
-            echo 'Deployment Failed. Check the logs.'
+            echo 'Deployment Failed. Still Docker not found or error in build.'
         }
     }
 }
