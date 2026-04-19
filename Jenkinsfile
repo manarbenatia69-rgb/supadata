@@ -1,41 +1,52 @@
 pipeline {
     agent any
-    
+
+    environment {
+        // الـ Registry متاعك أو اسم الـ Image (اختياري)
+        DOCKER_COMPOSE_FILE = 'docker-compose.yml'
+    }
+
     stages {
-        stage('Checkout SCM') {
+        stage('Checkout') {
             steps {
-                echo 'Fetching code from GitHub...'
+                // سحب الكود من GitHub
                 checkout scm
             }
         }
-        
-        stage('Maven Build') {
+
+        stage('Build Backend') {
             steps {
-                echo 'Running: mvn clean package -DskipTests'
-                // هوني نوهمو Jenkins إنو العملية نجحت باش نتعداو للـ Stage اللي بعدها
-                echo 'Build Success: supadata-0.0.1-SNAPSHOT.jar generated.'
-            }
-        }
-        
-        stage('Docker Image Build') {
-            steps {
-                echo 'Running: docker build -t pfetest-backend-api .'
-                echo 'Image created: pfetest-backend-api:latest'
-            }
-        }
-        
-        stage('Push to Docker Hub') {
-            steps {
-                echo 'Pushing Image to Docker Hub...'
-                echo 'Status: Image pushed successfully.'
+                dir('supadata') { // يدخل لمجلد الـ Spring Boot
+                    sh 'chmod +x mvnw'
+                    sh './mvnw clean package -DskipTests'
+                }
             }
         }
 
-        stage('Deploy to Production') {
+        stage('Build & Deploy Containers') {
             steps {
-                echo 'Running: docker-compose up -d'
-                echo 'Application is live at http://localhost:8081'
+                script {
+                    // الكومند هذي باش تعمل Build للـ Dockerfiles الكل (Admin, Frontend, Backend)
+                    // وتشعلهم الكل مع الـ Database
+                    sh 'docker-compose up -d --build'
+                }
             }
+        }
+
+        stage('Verify Containers') {
+            steps {
+                // باش تتأكدي إنو الـ 4 Containers يخدموا
+                sh 'docker ps'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Project Deployed Successfully! Admin on 4201, Frontend on 4200'
+        }
+        failure {
+            echo 'Deployment Failed. Check the logs.'
         }
     }
 }
