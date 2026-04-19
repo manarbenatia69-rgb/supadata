@@ -1,81 +1,30 @@
 pipeline {
     agent any
-
-    environment {
-        BACKEND_IMAGE = "supadata-backend"
-        FRONTEND_IMAGE = "supadata-frontend"
+    
+    tools {
+        maven 'Maven 3.x' // Thabbet mel esm hedha f Jenkins (Global Tool Configuration)
     }
 
     stages {
-
         stage('Checkout') {
             steps {
-                git branch: 'main',
-                url: 'https://github.com/manarbenatia69-rgb/supadata.git'
+                git branch: 'main', url: 'https://github.com/manarbenatia69-rgb/supadata.git'
             }
         }
-
-        stage('Backend Build (Maven Docker)') {
+        
+        stage('Build Artifact') {
             steps {
-                dir('supadata') {
-                    sh '''
-                    docker run --rm \
-                    -v "$PWD":/app \
-                    -v "$HOME/.m2":/root/.m2 \
-                    -w /app \
-                    maven:3.9.6-eclipse-temurin-17 \
-                    mvn clean package -DskipTests
-                    '''
-                }
+                // Binnesba l-Windows nesta3mlou "bat"
+                bat 'mvn -f supadata/pom.xml clean package -DskipTests'
             }
         }
-
-        stage('Frontend Build') {
+        
+        stage('Docker Deploy') {
             steps {
-                dir('frontend') {
-                    sh '''
-                    npm install
-                    npm run build
-                    '''
-                }
+                // N-sakrou el qdim w n-7ellou el jdid
+                bat 'docker-compose down'
+                bat 'docker-compose up -d --build'
             }
-        }
-
-        stage('Docker Build Backend') {
-            steps {
-                dir('supadata') {
-                    sh 'docker build -t supadata-backend .'
-                }
-            }
-        }
-
-        stage('Docker Build Frontend') {
-            steps {
-                dir('frontend') {
-                    sh 'docker build -t supadata-frontend .'
-                }
-            }
-        }
-
-        stage('Run Containers') {
-            steps {
-                sh '''
-                docker rm -f backend || true
-                docker rm -f frontend || true
-
-                docker run -d -p 8081:8081 --name backend supadata-backend
-                docker run -d -p 4200:80 --name frontend supadata-frontend
-                '''
-            }
-        }
-    }
-
-    post {
-        success {
-            echo "✅ SUCCESS: PROJECT DEPLOYED"
-        }
-        failure {
-            echo "❌ FAILED: CHECK LOGS"
         }
     }
 }
