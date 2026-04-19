@@ -11,14 +11,21 @@ pipeline {
         stage('Checkout') {
             steps {
                 git branch: 'main',
-                    url: 'https://github.com/manarbenatia69-rgb/supadata.git'
+                url: 'https://github.com/manarbenatia69-rgb/supadata.git'
             }
         }
 
-        stage('Backend Build') {
+        stage('Backend Build (Maven Docker)') {
             steps {
-                dir('supadata') {   // <-- هذا folder متاع backend (بدّلها إذا اسمها مختلف)
-                    sh 'mvn clean package -DskipTests'
+                dir('supadata') {
+                    sh '''
+                    docker run --rm \
+                    -v "$PWD":/app \
+                    -v "$HOME/.m2":/root/.m2 \
+                    -w /app \
+                    maven:3.9.6-eclipse-temurin-17 \
+                    mvn clean package -DskipTests
+                    '''
                 }
             }
         }
@@ -26,8 +33,10 @@ pipeline {
         stage('Frontend Build') {
             steps {
                 dir('frontend') {
-                    sh 'npm install'
-                    sh 'npm run build'
+                    sh '''
+                    npm install
+                    npm run build
+                    '''
                 }
             }
         }
@@ -51,11 +60,11 @@ pipeline {
         stage('Run Containers') {
             steps {
                 sh '''
-                    docker rm -f backend || true
-                    docker rm -f frontend || true
+                docker rm -f backend || true
+                docker rm -f frontend || true
 
-                    docker run -d -p 8081:8081 --name backend supadata-backend
-                    docker run -d -p 4200:80 --name frontend supadata-frontend
+                docker run -d -p 8081:8081 --name backend supadata-backend
+                docker run -d -p 4200:80 --name frontend supadata-frontend
                 '''
             }
         }
