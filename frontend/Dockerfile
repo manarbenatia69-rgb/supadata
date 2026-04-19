@@ -1,15 +1,21 @@
-# Étape 1 : Build
-FROM node:18 AS build
+# Stage 1: Build (نستعملوا Node باش نصنعوا الـ files)
+FROM node:18-alpine AS build
 WORKDIR /app
-COPY . .
+
+# نصبوا الـ dependencies
+COPY package*.json ./
 RUN npm install
+
+# نزيدوا الكود و نعملوا build
+COPY . .
 RUN npm run build --configuration=production
 
-# Étape 2 : Serveur final
+# Stage 2: Serve (نستعملوا Nginx باش نعرضوا الـ files)
 FROM nginx:alpine
-# On vide le dossier par défaut de nginx pour être propre
-RUN rm -rf /usr/share/nginx/html/*
-# On copie les fichiers compilés vers le dossier de nginx
-COPY --from=build /app/dist/frontend /usr/share/nginx/html
+
+# رد بالك: بدلي 'name-of-your-app' بالاسم اللي تلقاه في الـ dist folder
+COPY --from=build /app/dist/name-of-your-app /usr/share/nginx/html
+
+# نزيدوا ملف الـ configuration متاع Nginx (اختياري لكن باهي للـ Routing)
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]

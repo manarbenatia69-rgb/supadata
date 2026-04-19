@@ -1,33 +1,46 @@
 services:
+  # 1. الداتابيز
   db:
     image: mysql:8.0
     container_name: mysql-db
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: supadata
-    ports:
-      - "3307:3306"
     volumes:
-      - mysql_data:/var/lib/mysql  # هذا هو سر الـ Persistence
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      timeout: 20s
-      retries: 10
+      - mysql_data:/var/lib/mysql
     networks:
       - pfe-network
 
+  # 2. الـ Backend (Spring Boot)
   backend-api:
     build: ./supadata
-    container_name: pfetest-backend-api-1
+    container_name: backend-service
     depends_on:
-      db:
-        condition: service_healthy
+      - db
     ports:
       - "8081:8081"
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/supadata?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false
-      - SPRING_DATASOURCE_USERNAME=root
-      - SPRING_DATASOURCE_PASSWORD=root
+    networks:
+      - pfe-network
+
+  # 3. الـ Admin Template (Angular)
+  admin-panel:
+    build: ./admin
+    container_name: admin-ui
+    ports:
+      - "4201:80" # يتحل على بورت 4201
+    depends_on:
+      - backend-api
+    networks:
+      - pfe-network
+
+  # 4. الـ Frontend Template (Angular)
+  client-store:
+    build: ./frontend
+    container_name: client-ui
+    ports:
+      - "4200:80" # يتحل على بورت 4200
+    depends_on:
+      - backend-api
     networks:
       - pfe-network
 
@@ -36,4 +49,4 @@ networks:
     driver: bridge
 
 volumes:
-  mysql_data:  # تعريف الـ Volume المستقل
+  mysql_data:

@@ -4,13 +4,13 @@ import { CrudService } from './crud.service';
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-
+private apiUrl = environment.apiUrl;
   constructor(private service: CrudService, private router: Router) {
 
   }
