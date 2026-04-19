@@ -1,4 +1,4 @@
-# Stage 1: Build (نستعملوا Node باش نصنعوا الـ files)
+# Stage 1: Build
 FROM node:18-alpine AS build
 WORKDIR /app
 
@@ -10,12 +10,11 @@ RUN npm install
 COPY . .
 RUN npm run build --configuration=production
 
-# Stage 2: Serve (نستعملوا Nginx باش نعرضوا الـ files)
+# Stage 2: Serve
 FROM nginx:alpine
 
-# رد بالك: بدلي 'name-of-your-app' بالاسم اللي تلقاه في الـ dist folder
-COPY --from=build /app/dist/name-of-your-app /usr/share/nginx/html
+# المصحح: استعملنا /app/dist/admin
+COPY --from=build /app/dist/admin /usr/share/nginx/html
 
-# نزيدوا ملف الـ configuration متاع Nginx (اختياري لكن باهي للـ Routing)
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
