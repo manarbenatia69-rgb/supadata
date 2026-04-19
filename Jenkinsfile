@@ -1,30 +1,72 @@
 pipeline {
     agent any
 
+    environment {
+        BACKEND_IMAGE = "supadata-backend"
+        FRONTEND_IMAGE = "supadata-frontend"
+    }
+
     stages {
 
         stage('Checkout') {
             steps {
-                git 'https://github.com/manarbenatia69-rgb/supadata.git'
+                git branch: 'main',
+                    url: 'https://github.com/manarbenatia69-rgb/supadata.git'
             }
         }
 
         stage('Backend Build') {
             steps {
-                bat 'mvn clean install -DskipTests'
+                dir('supadata') {
+                    sh 'mvn clean package -DskipTests'
+                }
             }
         }
 
-        stage('Run Backend Tests') {
+        stage('Frontend Build') {
             steps {
-                bat 'mvn test'
+                dir('frontend') {
+                    sh 'npm install'
+                    sh 'npm run build'
+                }
+            }
+        }
+
+        stage('Docker Build Backend') {
+            steps {
+                dir('supadata') {
+                    sh 'docker build -t supadata-backend .'
+                }
+            }
+        }
+
+        stage('Docker Build Frontend') {
+            steps {
+                dir('frontend') {
+                    sh 'docker build -t supadata-frontend .'
+                }
+            }
+        }
+
+        stage('Run Containers') {
+            steps {
+                sh '''
+                    docker rm -f backend || true
+                    docker rm -f frontend || true
+
+                    docker run -d -p 8081:8081 --name backend supadata-backend
+                    docker run -d -p 4200:80 --name frontend supadata-frontend
+                '''
             }
         }
     }
 
     post {
         success {
-            echo '🎯 BACKEND OK - PIPELINE SUCCESS'
+            echo "✅ SUCCESS: PROJECT DEPLOYED"
+        }
+        failure {
+            echo "❌ FAILED: CHECK LOGS"
         }
     }
 }
