@@ -9,8 +9,12 @@ services:
       - "3307:3306"
 
   backend-api:
-    build: ./supadata  # <--- thabbet li esm el dossier s'hih houni
+    build: ./supadata
     depends_on:
       - db
     ports:
       - "8081:8081"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/supadata?createDatabaseIfNotExist=true
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
