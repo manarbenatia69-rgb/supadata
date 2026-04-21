@@ -8,6 +8,11 @@ services:
       MYSQL_DATABASE: supadata
     volumes:
       - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     networks:
       - pfe-network
 
@@ -16,21 +21,24 @@ services:
     build: ./supadata
     container_name: backend-service
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     ports:
       - "8081:8081"
     environment:
-      # ربط الـ Backend بالـ Database (الباسورد واليوزر)
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/supadata?createDatabaseIfNotExist=true&useSSL=false
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
-      # أسرار Google (باش ما نطلعوهمش في GitHub)
+      # التعديل هنا: استعملنا MySQLDialect العامة (Hibernate 7 يحبها هكا)
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.MySQLDialect
+      SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.MySQLDialect
+      # أسرار Google
       SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GOOGLE_CLIENT_ID: "710278742537-ona619q0ujhh2bnlvf7g4ik5jp3482lm.apps.googleusercontent.com"
       SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GOOGLE_CLIENT_SECRET: "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"
     networks:
       - pfe-network
 
-  # 3. الـ Admin Template (Angular)
+  # 3. الـ Admin Template
   admin-panel:
     build: ./admin
     container_name: admin-ui
@@ -41,7 +49,7 @@ services:
     networks:
       - pfe-network
 
-  # 4. الـ Frontend Template (Angular)
+  # 4. الـ Frontend Template
   client-store:
     build: ./frontend
     container_name: client-ui
