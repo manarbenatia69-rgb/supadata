@@ -5,44 +5,51 @@ pipeline {
         stage('Initial Check') {
             steps {
                 sh 'docker version'
-                sh 'node -v'
-                sh 'mvn -v'
+                // نحينا node -v و mvn -v من هنا خاطر باش نستعملوهم وسط الـ Containers متاعهم
             }
         }
 
-        // 1. Stage الـ Backend
+        // 1. بناء الـ Backend باستعمال Maven Container
         stage('Build Backend') {
+            agent {
+                docker { image 'maven:3.9.6-eclipse-temurin-17' }
+            }
             steps {
-                dir('supadata') { // اسم Dossier الـ Backend (IntelliJ)
+                dir('supadata') {
                     sh 'mvn clean package -DskipTests'
                 }
             }
         }
 
-        // 2. Stage الـ Admin
+        // 2. بناء الـ Admin باستعمال Node Container
         stage('Build Admin') {
+            agent {
+                docker { image 'node:18-alpine' }
+            }
             steps {
-                dir('Admin') { // اسم Dossier الـ Admin
+                dir('Admin') {
                     sh 'npm install'
                     sh 'npm run build'
                 }
             }
         }
 
-        // 3. Stage الـ Frontend
+        // 3. بناء الـ Frontend باستعمال Node Container
         stage('Build Frontend') {
+            agent {
+                docker { image 'node:18-alpine' }
+            }
             steps {
-                dir('Frontend') { // اسم Dossier الـ Frontend الـ Client
+                dir('Frontend') {
                     sh 'npm install'
                     sh 'npm run build'
                 }
             }
         }
 
-        // 4. Stage الـ Docker Deployment (الضربة القاضية)
+        // 4. الـ Deployment الـ Docker-Compose
         stage('Deploy with Docker Compose') {
             steps {
-                // هوني الـ Jenkins يعاود يشغل الـ Containers بالنسخة الجديدة
                 sh 'docker-compose up -d --build'
             }
         }
@@ -50,7 +57,10 @@ pipeline {
 
     post {
         success {
-            echo 'Pipeline finished successfully! All services are up.'
+            echo 'Pipeline finished successfully!'
+        }
+        failure {
+            echo 'Pipeline failed. Check the logs.'
         }
     }
 }
