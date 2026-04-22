@@ -40,7 +40,7 @@ pipeline {
                 docker { image 'node:18-alpine' }
             }
             steps {
-                dir('Frontend') {
+                dir('frontend') {
                     sh 'npm install'
                     sh 'npm run build'
                 }
