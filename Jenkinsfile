@@ -5,62 +5,65 @@ pipeline {
         stage('Initial Check') {
             steps {
                 sh 'docker version'
-                // نحينا node -v و mvn -v من هنا خاطر باش نستعملوهم وسط الـ Containers متاعهم
+                // نثبتو هل docker-compose موجود أو لا
+                sh 'docker-compose --version || echo "docker-compose not found"'
             }
         }
 
-        // 1. بناء الـ Backend باستعمال Maven Container
+        // 1. Build Backend
         stage('Build Backend') {
-            agent {
-                docker { image 'maven:3.9.6-eclipse-temurin-17' }
-            }
+            agent { docker { image 'maven:3.9.6-eclipse-temurin-17' } }
             steps {
-                dir('supadata') {
-                    sh 'mvn clean package -DskipTests'
+                dir('supadata') { 
+                    sh 'mvn clean package -DskipTests' 
                 }
             }
         }
 
-        // 2. بناء الـ Admin باستعمال Node Container
+        // 2. Build Admin
         stage('Build Admin') {
-            agent {
-                docker { image 'node:18-alpine' }
-            }
+            agent { docker { image 'node:18-alpine' } }
             steps {
-                dir('Admin') {
+                dir('Admin') { 
                     sh 'npm install'
-                    sh 'npm run build'
+                    sh 'npm run build --configuration=production' 
                 }
             }
         }
 
-        // 3. بناء الـ Frontend باستعمال Node Container
+        // 3. Build Frontend (باسم الفولدر الصغير f)
         stage('Build Frontend') {
-            agent {
-                docker { image 'node:18-alpine' }
-            }
+            agent { docker { image 'node:18-alpine' } }
             steps {
-                dir('frontend') {
+                dir('frontend') { 
                     sh 'npm install'
-                    sh 'npm run build'
+                    sh 'npm run build --configuration=production' 
                 }
             }
         }
 
-        // 4. الـ Deployment الـ Docker-Compose
-        stage('Deploy with Docker Compose') {
+        // 4. Deployment (Nginx & Docker Compose)
+        stage('Deploy') {
             steps {
-                sh 'docker compose up -d --build'
+                script {
+                    try {
+                        // تجربة docker-compose بالمطة
+                        sh 'docker-compose up -d --build'
+                    } catch (Exception e) {
+                        // إذا فشلت، تجربة docker compose بالفراغ
+                        sh 'docker compose up -d --build'
+                    }
+                }
             }
         }
     }
 
     post {
-        success {
-            echo 'Pipeline finished successfully!'
+        success { 
+            echo '🚀 SUCCESS: All projects built and deployed with Nginx!' 
         }
-        failure {
-            echo 'Pipeline failed. Check the logs.'
+        failure { 
+            echo '❌ FAILURE: Check the logs above.' 
         }
     }
 }
