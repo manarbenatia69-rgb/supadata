@@ -1,26 +1,56 @@
 pipeline {
-    agent any // الـ Agent الرئيسي لازم يكون موجود
+    agent any 
 
     stages {
-        stage('Test Docker Connection') {
+        stage('Initial Check') {
             steps {
-                // نثبتوا إن الـ Jenkins توا ولا يشوف في الـ Docker
-                sh 'docker version' 
+                sh 'docker version'
+                sh 'node -v'
+                sh 'mvn -v'
             }
         }
 
-        stage('Build Backend with Maven Container') {
-            agent {
-                docker { 
-                    image 'maven:3.9.6-eclipse-temurin-17'
-                    args '-v /var/run/docker.sock:/var/run/docker.sock' // نمرروا الـ socket للـ agent الجديد زادة
-                }
-            }
+        // 1. Stage الـ Backend
+        stage('Build Backend') {
             steps {
-                dir('supadata') {
+                dir('supadata') { // اسم Dossier الـ Backend (IntelliJ)
                     sh 'mvn clean package -DskipTests'
                 }
             }
+        }
+
+        // 2. Stage الـ Admin
+        stage('Build Admin') {
+            steps {
+                dir('Admin') { // اسم Dossier الـ Admin
+                    sh 'npm install'
+                    sh 'npm run build'
+                }
+            }
+        }
+
+        // 3. Stage الـ Frontend
+        stage('Build Frontend') {
+            steps {
+                dir('Frontend') { // اسم Dossier الـ Frontend الـ Client
+                    sh 'npm install'
+                    sh 'npm run build'
+                }
+            }
+        }
+
+        // 4. Stage الـ Docker Deployment (الضربة القاضية)
+        stage('Deploy with Docker Compose') {
+            steps {
+                // هوني الـ Jenkins يعاود يشغل الـ Containers بالنسخة الجديدة
+                sh 'docker-compose up -d --build'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline finished successfully! All services are up.'
         }
     }
 }
