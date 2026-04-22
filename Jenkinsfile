@@ -2,51 +2,88 @@ pipeline {
     agent any
 
     environment {
-        // تأكدي إن اسم الملف فيه مطة موش فراغ
-        DOCKER_COMPOSE_FILE = 'docker-compose.yml'
+        DOCKER_HUB_USER = 'manarbenatia69' // بدلو بحسابك إذا تحب تعمل Push
+        IMAGE_TAG = "latest"
     }
 
     stages {
-        stage('Checkout') {
+        // 1. تجريب الكود من GitHub
+        stage('Checkout Source') {
             steps {
                 checkout scm
             }
         }
 
+        // 2. بناء الـ Backend (SpringBoot) وسط Maven Container
         stage('Build Backend') {
+            agent {
+                docker { 
+                    image 'maven:3.9.6-eclipse-temurin-17'
+                    args '-v /root/.m2:/root/.m2'
+                }
+            }
             steps {
-                dir('supadata') {
-                    sh 'chmod +x mvnw'
-                    sh './mvnw clean package -DskipTests'
+                dir('supadata') { // ثبت في اسم الملف لداخل (backend folder)
+                    sh 'mvn clean package -DskipTests'
                 }
             }
         }
 
-       stage('Build & Deploy Containers') {
-    steps {
-        script {
-            // استعملي docker-compose بالمطة (القديمة) أو جربي الأوامر الأساسية
-            // إذا قعدت تعكس، استعملي docker ps برك باش تثبتي الربط وتخضار الـ Pipeline
-            sh 'docker ps' 
-            echo "Containers are managed via Docker Host"
-        }
-    }
-}
-        stage('Verify') {
+        // 3. بناء الـ Admin (Angular) وسط Node Container
+        stage('Build Admin Template') {
+            agent {
+                docker { image 'node:20' }
+            }
             steps {
-                withEnv(['PATH+EXTRA=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin']) {
-                    sh 'docker ps'
+                dir('Admin') { 
+                    sh 'npm install'
+                    sh 'npm run build --configuration=production'
                 }
+            }
+        }
+
+        // 4. بناء الـ Frontend (Angular) وسط Node Container
+        stage('Build Frontend Template') {
+            agent {
+                docker { image 'node:20' }
+            }
+            steps {
+                dir('frontend') {
+                    sh 'npm install'
+                    sh 'npm run build --configuration=production'
+                }
+            }
+        }
+
+        // 5. صناعة الـ Docker Images باستعمال الـ Dockerfiles اللي عندك
+        stage('Dockerize Services') {
+            steps {
+                script {
+                    // بناء صورة الـ Backend
+                    sh "docker build -t backend-image:${IMAGE_TAG} ./supadata"
+                    
+                    // بناء صورة الـ Admin
+                    sh "docker build -t admin-image:${IMAGE_TAG} ./Admin"
+                    
+                    // بناء صورة الـ Frontend
+                    sh "docker build -t frontend-image:${IMAGE_TAG} ./frontend"
+                }
+            }
+        }
+
+        // 6. تشغيل المشروع كامل باستعمال Docker Compose
+        stage('Deploy with Compose') {
+            steps {
+                sh 'docker-compose down'
+                sh 'docker-compose up -d'
+                echo 'Project is live on production!'
             }
         }
     }
 
     post {
-        success {
-            echo 'Project Deployed Successfully!'
-        }
-        failure {
-            echo 'Deployment Failed. Still Docker not found or error in build.'
+        always {
+            cleanWs() // تنظيف الخدمة بعد ما يكمل
         }
     }
 }

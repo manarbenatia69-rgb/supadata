@@ -1,18 +1,17 @@
-# Stage 1: Build
-FROM node:18-alpine AS build
-WORKDIR /app
+# استعمل نسخة Nginx خفيفة
+FROM nginx:stable-alpine
 
-COPY package*.json ./
-RUN npm install
+# 1. فسخ الملفات القديمة اللي تجي par défaut مع Nginx
+RUN rm -rf /usr/share/nginx/html/*
 
-COPY . .
-RUN npm run build --configuration=production
+# 2. كوبي ملفات الـ build لمسار Nginx
+# استعملنا dist/frontend خاطر هذا وين موجود الـ index.html متاعك
+COPY dist/frontend /usr/share/nginx/html
 
-# Stage 2: Serve
-FROM nginx:alpine
+# 3. كوبي الـ config متاع nginx (باش الـ routes يخدمو مريڨل)
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# ملاحظة: إذا اسم المجلد في الـ dist موش frontend، بدلي الكلمة هذي برك
-COPY --from=build /app/dist/frontend /usr/share/nginx/html
-
+# 4. حل الـ port 80
 EXPOSE 80
+
 CMD ["nginx", "-g", "daemon off;"]
