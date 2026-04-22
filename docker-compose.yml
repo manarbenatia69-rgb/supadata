@@ -14,8 +14,9 @@ services:
     volumes:
       - db_data:/var/lib/mysql
 
-  # 2. Backend (Spring Boot)
+  # 2. Backend (Spring Boot) - مجلد supadata
   pfe-backend:
+    build: ./supadata        # <--- إسم مجلد الـ IntelliJ
     image: pfetest-backend:latest
     container_name: pfe-backend
     restart: always
@@ -24,13 +25,14 @@ services:
     ports:
       - "8080:8081"
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://pfe-db:3306/supadata_db?createDatabaseIfNotExist=true
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/supadata_db?createDatabaseIfNotExist=true
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
 
-  # 3. Frontend (Client Store)
+  # 3. Frontend (Client Store) - مجلد frontend
   pfe-frontend:
+    build: ./frontend       # <--- إسم مجلد الـ Angular Front
     image: pfetest-frontend:latest
     container_name: pfe-frontend
     restart: always
@@ -39,13 +41,14 @@ services:
     depends_on:
       - pfe-backend
 
-  # 4. Admin Panel
+  # 4. Admin Panel - مجلد Admin
   pfe-admin:
+    build: ./Admin          # <--- إسم مجلد الـ Angular Admin (ثبت كان الـ A كبيرة)
     image: pfetest-admin:latest
     container_name: pfe-admin
     restart: always
     ports:
-      - "4001:80" # حليناه على البور 81 باش ما يضربش مع الـ Frontend
+      - "4001:80"
     depends_on:
       - pfe-backend
 
