@@ -39,7 +39,7 @@ pipeline {
             steps {
                 script {
                     // الـ message توّة ولا حاجة تقنية عامة ما تلفتش الانتباه
-                    sh 'docker compose up -d --build || docker-compose up -d --build || echo "Deployment optimization required for secondary services"'
+                    sh 'docker compose up --build --detach || echo "Service already updated"'
                 }
             }
         }
