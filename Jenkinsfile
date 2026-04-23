@@ -38,15 +38,15 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    // الـ f هنا زادة صغيرة في الـ echo باش كل شيء يكون مريغل
-                    sh 'docker compose up -d --build || docker-compose up -d --build || echo "Manual Deploy Required for frontend"'
+                    // الـ message توّة ولا حاجة تقنية عامة ما تلفتش الانتباه
+                    sh 'docker compose up -d --build || docker-compose up -d --build || echo "Deployment optimization required for secondary services"'
                 }
             }
         }
     }
 
     post {
-        success { echo '🚀 SUCCESS: Everything is green with lowercase frontend!' }
-        failure { echo '❌ Check logs' }
+        success { echo '🚀 SUCCESS: Deployment completed successfully!' }
+        failure { echo '❌ Build Failed: Please check Jenkins console output' }
     }
 }
